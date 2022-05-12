@@ -23,6 +23,7 @@ public class LoginController {
     private String password;
     public static UserRepository ur = new UserRepository();
     public static User u = new User();
+    public static RegistrationController rc = new RegistrationController();
 
     public Long getId() {
         return id;
@@ -58,12 +59,13 @@ public class LoginController {
         String inpPass = keyboard.nextLine();
         if (validataionUser(inpUser, inpPass)) {
             System.out.println("login sucess  !!!!");
-            System.out.println("Delete Users?? y/n:");
-            String input = keyboard.next();
-            if (!input.equals("y")) {
-                ur.removeUser(u);
-                System.out.println("user removed successfully!!");
-            }
+            System.out.println("------------------");
+            rc.registerStudent();
+            rc.viewStudentDetails();
+
+        }
+        else {
+            System.out.println("UserName or Password did not match!!");
         }
 
         /*if ((inpUser).equals("admin") && (inpPass).equals("123abc")) {
@@ -85,7 +87,7 @@ public class LoginController {
         Scanner keyboard = new Scanner(System.in);
         System.out.println("Enter username: ");
         System.out.println("------------------");
-        System.out.println("User Name must have alphabets and atleast one number");
+        System.out.println("User Name must be atleast 4 characters long");
         String userName = keyboard.next();
 
         if (!verifyUserName(userName)) {
@@ -96,6 +98,7 @@ public class LoginController {
         System.out.println("Enter User Id");
         System.out.println("------------------");
         Long userId = keyboard.nextLong();
+        
         System.out.println("Enter password:");
         System.out.println("------------------");
         System.out.println("Password must have;");

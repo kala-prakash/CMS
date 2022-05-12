@@ -21,7 +21,7 @@ public class Validation {
     }
 
     public static boolean verifyName(String name) {
-        Pattern p = Pattern.compile("[([A-Za-z]* \\s){1-4}]");
+        Pattern p = Pattern.compile("[a-zA-Z]{4,}(?: [a-zA-Z]+){0,2}$");
         Matcher m = p.matcher(name);
         return (m.find() && m.group().equals(name));
     }
@@ -40,7 +40,7 @@ public class Validation {
     }
     
     public static boolean verifyUserName(String userName){
-    Pattern p = Pattern.compile("([a-zA-z]*[0-9]+)");
+    Pattern p = Pattern.compile("([a-zA-z0-9]*{4})");
     Matcher m = p.matcher(userName);
     return (m.find()) && m.group().equals(userName);
     }

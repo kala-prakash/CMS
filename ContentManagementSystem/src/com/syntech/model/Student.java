@@ -5,49 +5,75 @@
  */
 package com.syntech.model;
 
-
-
-
-
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 /**
  *
  * @author kala
  */
 //Register Students
-public class Student{
-    private int id;
-    private String name;
+public class Student {
+
+    private Long id;
+    private String studentName;
+    private String facultyName;
+    private String semesterName;
     private String email;
-    private String address;
     private String phone;
-    private String password;
-    private String cpassword;
-
-    public Student(int id, String name, String email, String address, String phone, String password, String cpassword) {
-        this.name = name;
-        this.email = email;
-        this.address = address;
-        this.phone = phone;
-        this.password = password;
-        this.cpassword = cpassword;
-    }
+    private String address;
+    private String startDate;
+    private String endDate;
     
+ 
 
-    public int getId() {
+
+    public Student() {
+    }
+
+    public Student(Long id, String studentName, String facultyName, String semesterName, String email, String phone, String address, String startDate, String endDate) {
+        this.id = id;
+        this.studentName = studentName;
+        this.facultyName = facultyName;
+        this.semesterName = semesterName;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getStudentName() {
+        return studentName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
+    }
+
+    public String getFacultyName() {
+        return facultyName;
+    }
+
+    public void setFacultyName(String facultyName) {
+        this.facultyName = facultyName;
+    }
+
+    public String getSemesterName() {
+        return semesterName;
+    }
+
+    public void setSemesterName(String semesterName) {
+        this.semesterName = semesterName;
     }
 
     public String getEmail() {
@@ -58,14 +84,6 @@ public class Student{
         this.email = email;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
     public String getPhone() {
         return phone;
     }
@@ -74,25 +92,79 @@ public class Student{
         this.phone = phone;
     }
 
-    public String getPassword() {
-        return password;
+    public String getAddress() {
+        return address;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public String getCpassword() {
-        return cpassword;
+    public String getStartDate() {
+        return startDate;
     }
 
-    public void setCpassword(String cpassword) {
-        this.cpassword = cpassword;
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 67 * hash + Objects.hashCode(this.id);
+        hash = 67 * hash + Objects.hashCode(this.studentName);
+        hash = 67 * hash + Objects.hashCode(this.facultyName);
+        hash = 67 * hash + Objects.hashCode(this.semesterName);
+        hash = 67 * hash + Objects.hashCode(this.email);
+        hash = 67 * hash + Objects.hashCode(this.phone);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Student other = (Student) obj;
+        if (!Objects.equals(this.studentName, other.studentName)) {
+            return false;
+        }
+        if (!Objects.equals(this.facultyName, other.facultyName)) {
+            return false;
+        }
+        if (!Objects.equals(this.semesterName, other.semesterName)) {
+            return false;
+        }
+        if (!Objects.equals(this.email, other.email)) {
+            return false;
+        }
+        if (!Objects.equals(this.phone, other.phone)) {
+            return false;
+        }
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" + "id=" + id + ", studentName=" + studentName + ", facultyName=" + facultyName + ", semesterName=" + semesterName + ", email=" + email + ", phone=" + phone + ", address=" + address + ", startDate=" + startDate + ", endDate=" + endDate + '}';
     }
     
-   
-       
+
 }
-
-
-    

@@ -13,11 +13,12 @@ import java.util.*;
  *
  * @author kala
  */
+//yesma abstraction use garne
 public class UserRepository {
 
-     private  Map<String, User> userMap = new HashMap<>();
+    private Map<String, User> userMap = new HashMap<>();
 
-    public  Map<String, User> getUserMap() {
+    public Map<String, User> getUserMap() {
         return userMap;
     }
 
@@ -25,20 +26,13 @@ public class UserRepository {
         this.userMap = userMap;
     }
 
-   
-    
-    public void saveUser(User userDetail){
+    public void saveUser(User userDetail) {
         userMap.put(userDetail.getUsername(), userDetail);
-        
-        
-        
+
     }
-    
-    public void removeUser(User userDetail){
+
+    public void removeUser(User userDetail) {
         userMap.remove(userDetail.getUsername());
-    }    
-            
-  
     }
 
-
+}

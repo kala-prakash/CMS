@@ -5,10 +5,30 @@
  */
 package com.syntech.repository;
 
+import static com.syntech.controller.RegistrationController.stud;
+import com.syntech.model.Student;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author kala
  */
 public class StudentRepository {
+    private List<Student> studentList = new ArrayList<>();
+
+    public List<Student> getStudentList() {
+        return studentList;
+    }
+
+    public void setStudentList(List<Student> studentList) {
+        this.studentList = studentList;
+    }
+    public void addStudent(Student studentDetail) {
+        studentList.add(studentDetail);
+
+    }
     
+
+
 }

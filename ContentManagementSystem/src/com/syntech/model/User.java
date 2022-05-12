@@ -17,10 +17,9 @@ public class User {
     private Long id;
     private String username;
     private String password;
-    private ArrayList<User> userList;
-
+    
     public User() {
-        userList = new ArrayList<>();
+        
         
     }
 
