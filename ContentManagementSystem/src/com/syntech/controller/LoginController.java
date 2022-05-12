@@ -9,6 +9,11 @@ import com.syntech.model.User;
 import com.syntech.repository.UserRepository;
 import static com.syntech.utilities.Validation.verifyPassword;
 import static com.syntech.utilities.Validation.verifyUserName;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.util.Arrays;
 
 import java.util.Scanner;
 
@@ -63,8 +68,7 @@ public class LoginController {
             rc.registerStudent();
             rc.viewStudentDetails();
 
-        }
-        else {
+        } else {
             System.out.println("UserName or Password did not match!!");
         }
 
@@ -82,7 +86,7 @@ public class LoginController {
 
     }
 
-    public void signUp() {
+    public void signUp() throws NoSuchAlgorithmException {
 
         Scanner keyboard = new Scanner(System.in);
         System.out.println("Enter username: ");
@@ -98,7 +102,7 @@ public class LoginController {
         System.out.println("Enter User Id");
         System.out.println("------------------");
         Long userId = keyboard.nextLong();
-        
+
         System.out.println("Enter password:");
         System.out.println("------------------");
         System.out.println("Password must have;");
@@ -113,6 +117,18 @@ public class LoginController {
         String cpassword = keyboard.next();
         if (password.equals(cpassword)) {
             System.out.println("Password matches!!");
+            //Generating Salt
+            //we use the SecureRandom class from java.security
+            SecureRandom random = new SecureRandom();
+            byte[] salt = new byte[16];
+            random.nextBytes(salt);
+            //Then we use the MessageDigest class to configure SHA-512 has function with our salt
+            MessageDigest md = MessageDigest.getInstance("SHA-512");
+            md.update(salt);
+            //And with that added, we can now use the digest method  to generate our hashed password
+            byte[] hashedPassword = md.digest(password.getBytes(StandardCharsets.UTF_8));
+            //System.out.println("Password:" + Arrays.toString(hashedPassword));
+
             System.out.println("New user created..");
             User u = new User(userId, userName, password);
             ur.saveUser(u);
