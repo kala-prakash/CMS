@@ -13,12 +13,10 @@ import java.util.List;
  *
  * @author kala
  */
-interface Repo {
 
-    public void addStudent(Student studentDetail);
-}
+    
 
-public abstract class StudentRepository implements Repo {
+public class StudentRepository {
 
     private List<Student> studentList = new ArrayList<>();
 
@@ -30,7 +28,7 @@ public abstract class StudentRepository implements Repo {
         this.studentList = studentList;
     }
 
-    @Override
+   
     public void addStudent(Student studentDetail) {
         studentList.add(studentDetail);
 
