@@ -18,90 +18,8 @@ import java.util.Scanner;
  */
 public class RegistrationController {
 
-    private Long id;
-    private String studentName;
-    private String facultyName;
-    private String semesterName;
-    private String email;
-    private String phone;
-    private String address;
-    private String startDate;
-    private String endDate;
     public static Student stud = new Student();
     StudentRepository sr = new StudentRepository();
-     
-      
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getStudentName() {
-        return studentName;
-    }
-
-    public void setStudentName(String studentName) {
-        this.studentName = studentName;
-    }
-
-    public String getFacultyName() {
-        return facultyName;
-    }
-
-    public void setFacultyName(String facultyName) {
-        this.facultyName = facultyName;
-    }
-
-    public String getSemesterName() {
-        return semesterName;
-    }
-
-    public void setSemesterName(String semesterName) {
-        this.semesterName = semesterName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(String startDate) {
-        this.startDate = startDate;
-    }
-
-    public String getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(String endDate) {
-        this.endDate = endDate;
-    }
 
     public void registerStudent() {
 
@@ -179,4 +97,4 @@ public class RegistrationController {
             System.out.println("Student Details:.." + sr.getStudentList());
         }
     }
-     }
+}

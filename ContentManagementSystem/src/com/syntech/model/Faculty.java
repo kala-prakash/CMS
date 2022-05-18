@@ -11,7 +11,7 @@ package com.syntech.model;
  */
 public class Faculty {
     private Long id;
-    private String name;
+    private String facultyName;
     
     Semester sem = new Semester();
     
@@ -20,9 +20,9 @@ public class Faculty {
     public Faculty() {
     }
 
-    public Faculty(Long id, String name) {
+    public Faculty(Long id, String facultyName) {
         this.id = id;
-        this.name = name;
+        this.facultyName = facultyName;
     }
 
     public Long getId() {
@@ -33,12 +33,14 @@ public class Faculty {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFacultyName() {
+        return facultyName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFacultyName(String facultyName) {
+        this.facultyName = facultyName;
     }
+
+    
     
 }

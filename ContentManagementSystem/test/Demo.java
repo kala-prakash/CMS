@@ -32,13 +32,30 @@ public class Demo {
     }
     
 
+     
+    public String get_SHA_512_SecurePassword(String password, String salt){
+    String generatedPassword = null;
+    try {
+        MessageDigest md = MessageDigest.getInstance("SHA-512");
+        md.update(salt.getBytes(StandardCharsets.UTF_8));
+        byte[] bytes = md.digest(password.getBytes(StandardCharsets.UTF_8));
+        StringBuilder sb = new StringBuilder();
+        for(int i=0; i< bytes.length ;i++){
+            sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+        }
+        generatedPassword = sb.toString();
+    } catch (NoSuchAlgorithmException e) {
+        e.printStackTrace();
+    }
+    return generatedPassword;
+}
   
 
     public static void main(String[] args) throws NoSuchAlgorithmException {
        
-    Scanner input = new Scanner(System.in);
-    System.out.println("Enter the password:");
-    String password = input.next();
+   
+    
+    /*
     //Generating Salt
     //we use the SecureRandom class from java.security
     SecureRandom random = new SecureRandom();
@@ -49,7 +66,7 @@ public class Demo {
     md.update(salt);
     //And with that added, we can now use the digest method  to generate our hashed password
     byte[] hashedPassword = md.digest(password.getBytes(StandardCharsets.UTF_8));
-     System.out.println("Password:"+ Arrays.toString(hashedPassword));
-       
+     //System.out.println("Password:"+ Arrays.toString(hashedPassword));
+       */
     }
 }
