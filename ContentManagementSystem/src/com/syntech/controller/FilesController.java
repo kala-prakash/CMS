@@ -6,6 +6,7 @@
 package com.syntech.controller;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
@@ -46,8 +47,8 @@ public class FilesController {
 
     public void uploadFile() throws IOException {
 
-      Scanner input = new Scanner(System.in);
-        
+        Scanner input = new Scanner(System.in);
+
         System.out.println("---------------------");
         System.out.println("---------------------");
         System.out.println("Enter the Faculty Name:");
@@ -78,24 +79,45 @@ public class FilesController {
         System.out.println("---------------------");
         System.out.println("Enter the filepath:");
         String doc = input.next();
-        
-        FileWriter file= new FileWriter(doc+"//"+fileName,true);
-        BufferedWriter br= new BufferedWriter(file);
 
-        br.write("Faculty: "+facultyName);
+        FileWriter file = new FileWriter(doc + "//" + fileName, true);
+        BufferedWriter br = new BufferedWriter(file);
+
+        br.write("Faculty: " + facultyName);
         br.newLine();
-        br.write("Semester: "+semesterName);
+        br.write("Semester: " + semesterName);
         br.newLine();
-        br.write("Subject: " +subName);
+        br.write("Subject: " + subName);
         br.newLine();
-        br.write("Content Id: " +contId);
+        br.write("Content Id: " + contId);
         br.newLine();
         br.flush();
         br.close();
         System.out.println("---------------------");
-       
+
     }
+
+    public void deleteFile() {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Delete a file?? y/n");
+        String choose = input.next();
+        if (!choose.equals("y")) {
+            System.out.println("Exitting....");
+            System.exit(0);
+        } else {
+            System.out.println("Enter the file name");
+            String fileName = input.next();
+            System.out.println("Enter the file Path:");
+            String path = input.next();
+            File f = new File(path+ "//" + fileName);
+            
+            if (f.delete()) {
+                System.out.println(f.getName() + "Deleted.....");
+                System.exit(0);
+            } else {
+                System.out.println("Failed..");
+            }
+        }
+    }
+
 }
-
-
-       
