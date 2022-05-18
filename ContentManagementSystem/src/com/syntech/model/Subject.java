@@ -12,6 +12,8 @@ package com.syntech.model;
 public class Subject {
     private Long id;
     private String name;
+    
+    Content cont = new Content();
 
     public Subject() {
     }

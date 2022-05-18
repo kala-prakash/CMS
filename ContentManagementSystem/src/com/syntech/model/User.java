@@ -5,7 +5,7 @@
  */
 package com.syntech.model;
 
-import java.util.ArrayList;
+
 import java.util.Objects;
 
 /**

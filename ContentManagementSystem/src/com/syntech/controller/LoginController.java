@@ -13,8 +13,6 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-import java.util.Arrays;
-
 import java.util.Scanner;
 
 /**
@@ -54,6 +52,21 @@ public class LoginController {
         this.password = password;
     }
 
+    public void loginAdmin() {
+        Scanner keyboard = new Scanner(System.in);
+        System.out.println("Enter username: ");
+        String inpUser = keyboard.nextLine();
+        System.out.println("Enter password: ");
+        String inpPass = keyboard.nextLine();
+        if ((inpUser).equals("admin") && (inpPass).equals("admin")) {
+            System.out.println("You are logged in as admin....");
+        } else {
+            System.out.println("userName or password did not match.!!");
+            System.exit(0);
+        }
+
+    }
+
     public void login() {
 
         Scanner keyboard = new Scanner(System.in);
@@ -65,20 +78,11 @@ public class LoginController {
         if (validataionUser(inpUser, inpPass)) {
             System.out.println("login sucess  !!!!");
             System.out.println("------------------");
-            rc.registerStudent();
-            rc.viewStudentDetails();
 
         } else {
             System.out.println("UserName or Password did not match!!");
         }
 
-        /*if ((inpUser).equals("admin") && (inpPass).equals("123abc")) {
-            System.out.println("You are logged in as admin....");
-        } else {
-            System.out.println("userName or password did not match.!!");
-            System.exit(0);
-        }
-         */
     }
 
     public boolean validataionUser(String userName, String password) {

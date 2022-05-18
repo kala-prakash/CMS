@@ -28,7 +28,12 @@ public class RegistrationController {
     private String startDate;
     private String endDate;
     public static Student stud = new Student();
-    public static StudentRepository sr = new StudentRepository();
+    public static StudentRepository sr = new StudentRepository() {
+        @Override
+        public void addStudent(Student studentDetail) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+    };
 
     public Long getId() {
         return id;

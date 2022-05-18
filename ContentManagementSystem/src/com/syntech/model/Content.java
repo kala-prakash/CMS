@@ -13,6 +13,8 @@ public class Content {
     private Long id;
     private String name;
     private String docPath;
+    
+    ContentType contType = new ContentType();
 
     public Content() {
     }

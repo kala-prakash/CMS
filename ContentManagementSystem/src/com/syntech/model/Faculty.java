@@ -12,6 +12,10 @@ package com.syntech.model;
 public class Faculty {
     private Long id;
     private String name;
+    
+    Semester sem = new Semester();
+    
+    
 
     public Faculty() {
     }

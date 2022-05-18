@@ -15,6 +15,7 @@ public class Semester {
     private int startDate;
     private int endDate;
     
+    Subject sub = new Subject();
 
     public Semester() {
     }

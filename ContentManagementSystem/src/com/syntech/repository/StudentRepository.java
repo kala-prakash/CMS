@@ -5,7 +5,6 @@
  */
 package com.syntech.repository;
 
-import static com.syntech.controller.RegistrationController.stud;
 import com.syntech.model.Student;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +13,13 @@ import java.util.List;
  *
  * @author kala
  */
-public class StudentRepository {
+interface Repo {
+
+    public void addStudent(Student studentDetail);
+}
+
+public abstract class StudentRepository implements Repo {
+
     private List<Student> studentList = new ArrayList<>();
 
     public List<Student> getStudentList() {
@@ -24,11 +29,11 @@ public class StudentRepository {
     public void setStudentList(List<Student> studentList) {
         this.studentList = studentList;
     }
+
+    @Override
     public void addStudent(Student studentDetail) {
         studentList.add(studentDetail);
 
     }
-    
-
 
 }

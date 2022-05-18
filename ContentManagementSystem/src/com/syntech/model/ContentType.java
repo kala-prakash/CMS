@@ -11,7 +11,10 @@ package com.syntech.model;
  */
 public class ContentType {
     private Long id;
+    private String name;
     private String extension;
+    
+    
 
     public ContentType() {
     }
