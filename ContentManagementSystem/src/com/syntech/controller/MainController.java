@@ -6,6 +6,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
 
 public class MainController {
+    
 
     public static void main(String[] args) throws NoSuchAlgorithmException, IOException {
         while (true) {

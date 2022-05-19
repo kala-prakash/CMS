@@ -13,16 +13,17 @@ import java.util.Scanner;
  * @author kala
  */
 public class SubjectController {
+    static SubjectController subControl = new SubjectController();
     
-     public void addsubject() {
+     public void addSubject() {
 
        Scanner scan = new Scanner(System.in);
-        System.out.println("Enter the faculty name:");
-        String subjectName = scan.next();
+        
+        FilesController.subjectName = scan.next();
 
-        File theDir = new File("");
+        File theDir = new File(FilesController.basePath +"/"+FilesController.facultyName +"/"+  FilesController.semesterName+"/"+FilesController.subjectName);
         if (!theDir.exists()) {
-            theDir.mkdir();
+            theDir.mkdirs();
         }
         }
 }

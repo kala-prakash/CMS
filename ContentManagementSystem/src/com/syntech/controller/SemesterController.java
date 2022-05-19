@@ -5,6 +5,7 @@
  */
 package com.syntech.controller;
 
+
 import java.io.File;
 import java.util.Scanner;
 
@@ -13,14 +14,21 @@ import java.util.Scanner;
  * @author kala
  */
 public class SemesterController {
+    
+
+    
+    
+    
     static SemesterController sc = new SemesterController();
+   
         
       public void addSemester() {
+          
         Scanner scan = new Scanner(System.in);
-        System.out.println("Enter the semester name:");
-        String semesterName = scan.next();
+        
+        FilesController.semesterName = scan.next();
 
-        File theDir = new File("/home/kala/Desktop/Content/Faculty/" + semesterName);
+        File theDir = new File(FilesController.basePath +"/"+FilesController.facultyName +"/"+  FilesController.semesterName);
         if (!theDir.exists()) {
             theDir.mkdirs();
         }

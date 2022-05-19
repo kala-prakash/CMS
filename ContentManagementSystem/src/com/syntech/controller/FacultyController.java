@@ -5,6 +5,7 @@
  */
 package com.syntech.controller;
 
+
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
@@ -14,28 +15,36 @@ import java.util.Scanner;
  *
  * @author kala
  */
-public class FacultyController {
+public class FacultyController{
+
+    
+    
 
     static FacultyController fac = new FacultyController();
 
-        Scanner scan = new Scanner(System.in);
-    public void addFaculty() {
-        System.out.println("---------------------");
-        System.out.println("---------------------");
+    Scanner scan = new Scanner(System.in);
+    
         
-        String facultyName = scan.next();
 
-        File theDir = new File("/home/kala/Desktop/Content/Faculty/"+facultyName);
-           //String path =  "/home/kala/Desktop/Content/Faculty/"+facultyName;
+    
+        
+    public void addFaculty(){
+        System.out.println("---------------------");
+        System.out.println("---------------------");
+
+        FilesController.facultyName = scan.next();
+
+        File theDir = new File(FilesController.basePath +"/"+FilesController.facultyName );
+
         if (!theDir.exists()) {
             theDir.mkdirs();
         }
-        
+
     }
 
     public void viewFaculty() {
 
-        File dir = new File("/home/kala/Desktop/Content/Faculty");
+        File dir = new File(FilesController.basePath);
         File[] files = dir.listFiles();
         FileFilter fileFilter = new FileFilter() {
             public boolean accept(File file) {
@@ -53,14 +62,14 @@ public class FacultyController {
         }
     }
 
-    public void deleteFaculty() throws IOException{
+    public void deleteFaculty() throws IOException {
         System.out.println("Enter the Faculty Name to be deleted: ");
         String facultyName = scan.next();
-        File file = new File("/home/kala/Desktop/Content/Faculty/" + facultyName);
-        if(file.exists()){
-        file.delete();
+        File file = new File(FilesController.basePath + facultyName);
+        if (file.exists()) {
+            file.delete();
             System.out.println(facultyName + "...Deleted");
         }
-        
+
     }
 }

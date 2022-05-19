@@ -13,16 +13,23 @@ import java.util.Scanner;
  * @author kala
  */
 public class ContentTypeController {
- 
-     public void addContentType() {
 
-        Scanner scan = new Scanner(System.in);
-        System.out.println("Enter the faculty name:");
-        String contentTypeName = scan.next();
+    static ContentTypeController contType = new ContentTypeController();
 
-        File theDir = new File("");
+    Scanner scan = new Scanner(System.in);
+    File theDir;
+
+    public void addContentType() {
+
+        
+        FilesController.contentType = scan.next();
+
+        theDir = new File(FilesController.basePath + "/" + FilesController.facultyName + "/" + FilesController.semesterName + "/" + FilesController.subjectName + "/" + FilesController.contentName + "/" + FilesController.contentType);
         if (!theDir.exists()) {
-            theDir.mkdir();
-        }
+            theDir.mkdirs();
+       }
+    }
 }
-}
+
+
+       
