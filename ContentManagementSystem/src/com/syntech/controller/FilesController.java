@@ -23,7 +23,6 @@ import java.util.Scanner;
  * @author kala
  */
 public class FilesController {
-    
 
     public static String basePath = "/home/kala/Desktop/Files/";
     public static String facultyName;
@@ -65,13 +64,13 @@ public class FilesController {
         System.out.println("---------------------");
         fac.viewFaculty();
         System.out.println("---------------------");
-        System.out.println("1) Add Faculties? y/n");       
+        System.out.println("1) Add Faculties? y/n");
         choose = input.next();
         if (!choose.equals("y")) {
             mc.adminMenu();
-          
+
         }
-        fac.addFaculty();       
+        fac.addFaculty();
         System.out.println("---------------------");
         sc.viewSemester();
         System.out.println("---------------------");
@@ -79,37 +78,37 @@ public class FilesController {
         choose = input.next();
         if (!choose.equals("y")) {
             mc.adminMenu();
-                    
+
         }
         sc.addSemester();
         System.out.println("---------------------");
         subControl.viewSubject();
         System.out.println("---------------------");
-        System.out.println("1) Add Subject? y/n ");    
+        System.out.println("1) Add Subject? y/n ");
         choose = input.next();
         if (!choose.equals("y")) {
-           mc.adminMenu();
+            mc.adminMenu();
         }
-        subControl.addSubject();       
+        subControl.addSubject();
         System.out.println("---------------------");
         content.viewContent();
         System.out.println("---------------------");
         System.out.println("1) Add Content? y/n ");
         choose = input.next();
         if (!choose.equals("y")) {
-            mc.adminMenu(); 
+            mc.adminMenu();
         }
-        content.addContent();       
+        content.addContent();
         System.out.println("---------------------");
         contType.viewContentType();
         System.out.println("---------------------");
-        System.out.println("1) Add Content Type(pdf/doc/slides)? y/n ");       
+        System.out.println("1) Add Content Type(pdf/doc/slides)? y/n ");
         choose = input.next();
         if (!choose.equals("y")) {
             mc.adminMenu();
         }
-        contType.addContentType(); 
-  
+        contType.addContentType();
+
         System.out.println("---------------------");
         System.out.println("Enter the source Filepath:");
         String srcPath = input.next();
@@ -157,31 +156,21 @@ public class FilesController {
             }
             System.out.println("Files copied successfully...");
         }
-        
+
     }
 
-
-public void deleteFile() {
+    public void deleteFile() throws NoSuchAlgorithmException, IOException {
         Scanner input = new Scanner(System.in);
-        System.out.println("Delete a file?? y/n");
-        String choose = input.next();
-        if (!choose.equals("y")) {
-            System.out.println("Exitting....");
-            System.exit(0);
+        System.out.println("Enter the file path:");
+        String path = input.next();
+        if (!path.equals(path)) {
+            System.out.println("Returning to the admin Menu");
+            mc.adminMenu();
+        } else {
+            File f = new File(path);
+            f.delete();
         }
-            System.out.println("Enter the file name");
-            String fName = input.next();
-            System.out.println("Enter the file Path:");
-            String path = input.next();
-            File f = new File(path + "/" + fName);
 
-            if (f.delete()) {
-                System.out.println(fName + "  Deleted.....");
-                System.exit(0);
-            } else {
-                System.out.println("Failed..");
-            }
-        
     }
 
 }

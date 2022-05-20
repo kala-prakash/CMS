@@ -5,6 +5,7 @@
  */
 package com.syntech.controller;
 
+import static com.syntech.controller.MenuController.mc;
 import com.syntech.model.User;
 import com.syntech.repository.UserRepository;
 import static com.syntech.utilities.Validation.verifyPassword;
@@ -35,7 +36,7 @@ public class LoginController {
             System.out.println("You are logged in as admin....");
         } else {
             System.out.println("userName or password did not match.!!");
-            System.exit(0);
+            mc.mainMenu();
         }
 
     }
@@ -54,6 +55,7 @@ public class LoginController {
 
         } else {
             System.out.println("UserName or Password did not match!!");
+            mc.mainMenu();
         }
 
     }
