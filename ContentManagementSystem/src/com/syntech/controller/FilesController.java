@@ -8,12 +8,14 @@ package com.syntech.controller;
 import static com.syntech.controller.ContentController.content;
 import static com.syntech.controller.ContentTypeController.contType;
 import static com.syntech.controller.FacultyController.fac;
+import static com.syntech.controller.MenuController.mc;
 import static com.syntech.controller.SemesterController.sc;
 import static com.syntech.controller.SubjectController.subControl;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
 
 /**
@@ -21,6 +23,7 @@ import java.util.Scanner;
  * @author kala
  */
 public class FilesController {
+    
 
     public static String basePath = "/home/kala/Desktop/Files/";
     public static String facultyName;
@@ -54,36 +57,60 @@ public class FilesController {
         return fileName;
     }
 
-    public void uploadFile() throws IOException {
+    public void uploadFile() throws IOException, NoSuchAlgorithmException {
 
         Scanner input = new Scanner(System.in);
+        String choose;
 
         System.out.println("---------------------");
-        System.out.println("---------------------");
-        System.out.println("Faculties: ");
         fac.viewFaculty();
-        System.out.println("Enter the Faculty Name:");
-        fac.addFaculty();
-        System.out.println("Want to delete faculty?? y/n ?");
-        String choose = input.next();
-        if (choose.equals("y")) {
-            fac.deleteFaculty();
+        System.out.println("---------------------");
+        System.out.println("1) Add Faculties? y/n");       
+        choose = input.next();
+        if (!choose.equals("y")) {
+            mc.adminMenu();
+          
         }
-
+        fac.addFaculty();       
         System.out.println("---------------------");
-        System.out.println("[First, Second, Third, Fourth, Fifth, Sixth, Seventh, Eighth]");
-
+        sc.viewSemester();
+        System.out.println("---------------------");
+        System.out.println("Add Semester? y/n ");
+        choose = input.next();
+        if (!choose.equals("y")) {
+            mc.adminMenu();
+                    
+        }
         sc.addSemester();
-
         System.out.println("---------------------");
-        System.out.println("Enter the Subject");
-        subControl.addSubject();
+        subControl.viewSubject();
         System.out.println("---------------------");
-        System.out.println("Enter the Content");
-        content.addContent();
+        System.out.println("1) Add Subject? y/n ");    
+        choose = input.next();
+        if (!choose.equals("y")) {
+           mc.adminMenu();
+        }
+        subControl.addSubject();       
         System.out.println("---------------------");
-        System.out.println("Enter the Content Type");
-        contType.addContentType();
+        content.viewContent();
+        System.out.println("---------------------");
+        System.out.println("1) Add Content? y/n ");
+        choose = input.next();
+        if (!choose.equals("y")) {
+            mc.adminMenu(); 
+        }
+        content.addContent();       
+        System.out.println("---------------------");
+        contType.viewContentType();
+        System.out.println("---------------------");
+        System.out.println("1) Add Content Type(pdf/doc/slides)? y/n ");       
+        choose = input.next();
+        if (!choose.equals("y")) {
+            mc.adminMenu();
+        }
+        contType.addContentType(); 
+  
+        System.out.println("---------------------");
         System.out.println("Enter the source Filepath:");
         String srcPath = input.next();
         System.out.println("Enter the File Name");
@@ -97,8 +124,8 @@ public class FilesController {
             fis = new FileInputStream(srcPath);
             if (fileName.endsWith(".txt")) {
                 File docFile = new File(destPath);
-                  if (!docFile.exists()) {
-                   docFile.mkdirs();
+                if (!docFile.exists()) {
+                    docFile.mkdirs();
                 }
             } else if (fileName.endsWith(".pdf")) {
                 File pdfFile = new File(destPath);
@@ -113,9 +140,8 @@ public class FilesController {
             } else {
                 System.out.println("Failed....");
             }
-            
 
-            fos = new FileOutputStream(destPath+"/"+fileName);
+            fos = new FileOutputStream(destPath + "/" + fileName);
             byte[] buffer = new byte[1024];
             int length;
             while ((length = fis.read(buffer)) > 0) {
@@ -123,36 +149,39 @@ public class FilesController {
             }
 
         } finally {
-            if(fis != null){
-            fis.close();
+            if (fis != null) {
+                fis.close();
             }
-            if(fos != null){
-            fos.close();
+            if (fos != null) {
+                fos.close();
             }
             System.out.println("Files copied successfully...");
         }
+        
     }
 
-    public void deleteFile() {
+
+public void deleteFile() {
         Scanner input = new Scanner(System.in);
         System.out.println("Delete a file?? y/n");
         String choose = input.next();
         if (!choose.equals("y")) {
             System.out.println("Exitting....");
             System.exit(0);
-        } else {
+        }
             System.out.println("Enter the file name");
-            fileName = input.next();
+            String fName = input.next();
             System.out.println("Enter the file Path:");
             String path = input.next();
-            File f = new File(path + "/" + fileName);
+            File f = new File(path + "/" + fName);
 
             if (f.delete()) {
-                System.out.println(f.getName() + "  Deleted.....");
+                System.out.println(fName + "  Deleted.....");
                 System.exit(0);
             } else {
                 System.out.println("Failed..");
             }
-        }
+        
     }
+
 }

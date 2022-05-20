@@ -3,13 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/kala/Desktop/CMS/ContentManagementSystem/src/com/syntech/controller/SemesterController.java</file>
-            <file>file:/home/kala/Desktop/CMS/ContentManagementSystem/src/com/syntech/controller/SubjectController.java</file>
-            <file>file:/home/kala/Desktop/CMS/ContentManagementSystem/src/com/syntech/controller/ContentController.java</file>
-            <file>file:/home/kala/Desktop/CMS/ContentManagementSystem/src/com/syntech/controller/FacultyController.java</file>
             <file>file:/home/kala/Desktop/CMS/ContentManagementSystem/src/com/syntech/controller/MainController.java</file>
+            <file>file:/home/kala/Desktop/CMS/ContentManagementSystem/src/com/syntech/controller/MenuController.java</file>
             <file>file:/home/kala/Desktop/CMS/ContentManagementSystem/src/com/syntech/controller/FilesController.java</file>
-            <file>file:/home/kala/Desktop/CMS/ContentManagementSystem/src/com/syntech/controller/ContentTypeController.java</file>
         </group>
     </open-files>
 </project-private>

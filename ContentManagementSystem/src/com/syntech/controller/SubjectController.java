@@ -6,6 +6,7 @@
 package com.syntech.controller;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.util.Scanner;
 
 /**
@@ -13,18 +14,40 @@ import java.util.Scanner;
  * @author kala
  */
 public class SubjectController {
-    static SubjectController subControl = new SubjectController();
-    
-     public void addSubject() {
 
-       Scanner scan = new Scanner(System.in);
-        
+    static SubjectController subControl = new SubjectController();
+
+    public void addSubject() {
+        System.out.println("Enter the Subject Name:");
+        Scanner scan = new Scanner(System.in);
+
         FilesController.subjectName = scan.next();
 
-        File theDir = new File(FilesController.basePath +"/"+FilesController.facultyName +"/"+  FilesController.semesterName+"/"+FilesController.subjectName);
+        File theDir = new File(FilesController.basePath + "/" + FilesController.facultyName + "/" + FilesController.semesterName + "/" + FilesController.subjectName);
         if (!theDir.exists()) {
             theDir.mkdirs();
         }
-        }
-}
+    }
 
+    public void viewSubject() {
+
+        File dir = new File(FilesController.basePath + "/" + FilesController.facultyName + "/" + FilesController.semesterName);
+        File[] files = dir.listFiles();
+        FileFilter fileFilter = new FileFilter() {
+            @Override
+            public boolean accept(File file) {
+                return file.isDirectory();
+            }
+        };
+        files = dir.listFiles(fileFilter);
+        if (files.length == 0) {
+            System.out.println("Either dir does not exist or is not a directory");
+        } else {
+            for (File filename : files) {
+                System.out.println(filename.toString());
+            }
+        }
+    }
+
+    
+}

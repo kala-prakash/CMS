@@ -6,6 +6,7 @@
 package com.syntech.controller;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.util.Scanner;
 
 /**
@@ -16,7 +17,7 @@ public class ContentController {
     static ContentController content = new ContentController();
     
     public void addContent() {
-
+        System.out.println("Enter the Content Name:");
         Scanner scan = new Scanner(System.in);
         
         FilesController.contentName = scan.next();
@@ -25,5 +26,25 @@ public class ContentController {
         if (!theDir.exists()) {
             theDir.mkdirs();
         }
-}
+    }
+     public void viewContent() {
+
+        File dir = new File(FilesController.basePath + "/" + FilesController.facultyName+"/"+FilesController.semesterName+"/"+FilesController.subjectName);
+        File[] files = dir.listFiles();
+        FileFilter fileFilter = new FileFilter() {
+            @Override
+            public boolean accept(File file) {
+                return file.isDirectory();
+            }
+        };
+        files = dir.listFiles(fileFilter);
+        if (files.length == 0) {
+            System.out.println("Either dir does not exist or is not a directory");
+        } else {
+            for (File filename : files) {
+                System.out.println(filename.toString());
+            }
+        }
+    }
+     
 }
