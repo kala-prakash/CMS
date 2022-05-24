@@ -16,6 +16,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 /**
@@ -56,7 +57,7 @@ public class FilesController {
         return fileName;
     }
 
-    public void uploadFile() throws IOException, NoSuchAlgorithmException {
+    public void uploadFile() throws IOException, NoSuchAlgorithmException, SQLException {
 
         Scanner input = new Scanner(System.in);
         String choose;
@@ -159,7 +160,7 @@ public class FilesController {
 
     }
 
-    public void deleteFile() throws NoSuchAlgorithmException, IOException {
+    public void deleteFile() throws NoSuchAlgorithmException, IOException, SQLException {
         Scanner input = new Scanner(System.in);
         System.out.println("Enter the file path:");
         String path = input.next();

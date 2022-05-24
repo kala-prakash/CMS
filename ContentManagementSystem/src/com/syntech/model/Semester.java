@@ -10,21 +10,18 @@ package com.syntech.model;
  * @author kala
  */
 public class Semester {
+
     private Long id;
     private String name;
-    private int startDate;
-    private int endDate;
-    
+
     Subject sub = new Subject();
 
     public Semester() {
     }
 
-    public Semester(Long id, String name, int startDate, int endDate) {
+    public Semester(Long id, String name) {
         this.id = id;
         this.name = name;
-        this.startDate = startDate;
-        this.endDate = endDate;
     }
 
     public Long getId() {
@@ -43,21 +40,12 @@ public class Semester {
         this.name = name;
     }
 
-    public int getStartDate() {
-        return startDate;
+    public Subject getSub() {
+        return sub;
     }
 
-    public void setStartDate(int startDate) {
-        this.startDate = startDate;
+    public void setSub(Subject sub) {
+        this.sub = sub;
     }
 
-    public int getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(int endDate) {
-        this.endDate = endDate;
-    }
-    
-    
 }

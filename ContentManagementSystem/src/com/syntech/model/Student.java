@@ -5,7 +5,6 @@
  */
 package com.syntech.model;
 
-
 import java.util.Objects;
 
 /**
@@ -15,7 +14,7 @@ import java.util.Objects;
 //Register Students
 public class Student {
 
-    private Long id;
+    private Long studentID;
     private String studentName;
     private String facultyName;
     private String semesterName;
@@ -24,15 +23,13 @@ public class Student {
     private String address;
     private String startDate;
     private String endDate;
-    
- 
-
 
     public Student() {
+        
     }
-
-    public Student(Long id, String studentName, String facultyName, String semesterName, String email, String phone, String address, String startDate, String endDate) {
-        this.id = id;
+   
+    public Student(Long studentID, String studentName, String facultyName, String semesterName, String email, String phone, String address, String startDate, String endDate) {
+        this.studentID = studentID;
         this.studentName = studentName;
         this.facultyName = facultyName;
         this.semesterName = semesterName;
@@ -43,12 +40,12 @@ public class Student {
         this.endDate = endDate;
     }
 
-    public Long getId() {
-        return id;
+    public Long getStudentID() {
+        return studentID;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setStudentID(Long studentID) {
+        this.studentID = studentID;
     }
 
     public String getStudentName() {
@@ -118,7 +115,7 @@ public class Student {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 67 * hash + Objects.hashCode(this.id);
+        hash = 67 * hash + Objects.hashCode(this.studentID);
         hash = 67 * hash + Objects.hashCode(this.studentName);
         hash = 67 * hash + Objects.hashCode(this.facultyName);
         hash = 67 * hash + Objects.hashCode(this.semesterName);
@@ -154,7 +151,7 @@ public class Student {
         if (!Objects.equals(this.phone, other.phone)) {
             return false;
         }
-        if (!Objects.equals(this.id, other.id)) {
+        if (!Objects.equals(this.studentID, other.studentID)) {
             return false;
         }
         return true;
@@ -162,8 +159,7 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Student{" + "id=" + id + ", studentName=" + studentName + ", facultyName=" + facultyName + ", semesterName=" + semesterName + ", email=" + email + ", phone=" + phone + ", address=" + address + ", startDate=" + startDate + ", endDate=" + endDate + '}';
+        return "Student{" + "id=" + studentID + ", studentName=" + studentName + ", facultyName=" + facultyName + ", semesterName=" + semesterName + ", email=" + email + ", phone=" + phone + ", address=" + address + '}';
     }
-    
 
 }

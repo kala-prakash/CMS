@@ -10,17 +10,17 @@ package com.syntech.model;
  * @author kala
  */
 public class ContentType {
+
     private Long id;
     private String name;
     private String extension;
-    
-    
 
     public ContentType() {
     }
 
-    public ContentType(Long id, String extension) {
+    public ContentType(Long id, String name, String extension) {
         this.id = id;
+        this.name = name;
         this.extension = extension;
     }
 
@@ -32,6 +32,14 @@ public class ContentType {
         this.id = id;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getExtension() {
         return extension;
     }
@@ -39,6 +47,4 @@ public class ContentType {
     public void setExtension(String extension) {
         this.extension = extension;
     }
-    
-    
 }

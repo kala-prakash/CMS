@@ -8,6 +8,9 @@ package com.syntech.controller;
 import com.syntech.repository.UserRepository;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+import java.sql.Connection;
+import java.sql.SQLException;
+import static java.time.Clock.system;
 import java.util.Scanner;
 
 /**
@@ -52,7 +55,7 @@ public class MenuController {
         }
     }
 
-    public void adminMenu() throws NoSuchAlgorithmException, IOException {
+    public void adminMenu() throws NoSuchAlgorithmException, IOException, SQLException {
         Scanner input = new Scanner(System.in);
         System.out.println("--------------");
         System.out.println("1) Upload files..");
@@ -71,8 +74,7 @@ public class MenuController {
                 fc.deleteFile();
                 break;
             case "3":
-                rc.registerStudent();
-                rc.viewStudentDetails();
+                this.registerMenu();
                 break;
             case "4":
                 lc.signUp();
@@ -86,5 +88,37 @@ public class MenuController {
                 break;
         }
     }
-
+    
+    public void registerMenu() throws SQLException, IOException, NoSuchAlgorithmException{
+        Scanner input = new Scanner(System.in);
+        int inp;
+        System.out.println("1) Add Student ?");
+        System.out.println("2) Update Student Details?");
+        System.out.println("3) View Student Details ?");
+        System.out.println("4) Delete Student Details ?");
+        System.out.println("5) Return...");
+       
+        inp = input.nextInt();
+        switch(inp){
+            case 1:
+                rc.registerStudent();
+                break;
+                case 2:
+                rc.updateStudentDetails();
+                break;
+            case 3:
+                rc.viewStudentDetails();
+                break;
+            case 4:
+                rc.deleteStudentDetails();
+                break;
+            case 5:
+                this.adminMenu();
+            default:
+                this.registerMenu();
+                break;
+        }
+    }
 }
+
+
