@@ -19,7 +19,7 @@ public class ContentTypeController {
     Scanner scan = new Scanner(System.in);
 
     public void addContentType() {
-        System.out.println("Enter the content type:");
+        System.out.println("Enter the content type: ppt/txt/pdf ?");
         String contentType = scan.next();
         System.out.println("Enter the path");
         String path = scan.next();

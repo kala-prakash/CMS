@@ -34,64 +34,23 @@ public class BaseConfigController {
 
     public void uploadFile() throws IOException, NoSuchAlgorithmException, SQLException {
 
-        Scanner input = new Scanner(System.in);
-        String choose;
-        System.out.println("---------------------");
-        System.out.println("---------------------");
-        System.out.println("1) Add Faculties? y/n");
-        choose = input.next();
-        if (!choose.equals("y")) {
-            mc.adminMenu();
-        }
         String destPath = "";
-
         facultyName = fac.addFaculty("Faculty", null);
         System.out.println("---------------------");
-        System.out.println("---------------------");
-        System.out.println("Add Semester? y/n ");
-        choose = input.next();
-        if (!choose.equals("y")) {
-            mc.adminMenu();
-        }
         destPath = destPath + facultyName;
         semesterName = fac.addFaculty("Semester", destPath);
         System.out.println("---------------------");
-        System.out.println("---------------------");
-        System.out.println("1) Add Subject? y/n ");
-        choose = input.next();
-        if (!choose.equals("y")) {
-            mc.adminMenu();
-        }
         destPath = destPath + "/" + semesterName;
         subjectName = fac.addFaculty("Subject", destPath);
         System.out.println("---------------------");
-        System.out.println("---------------------");
-        System.out.println("Add Content? y/n ");
-        choose = input.next();
-        if (!choose.equals("y")) {
-            mc.adminMenu();
-        }
         destPath = destPath + "/" + subjectName;
         contentName = fac.addFaculty("Content", destPath);
         System.out.println("---------------------");
-        System.out.println("---------------------");
-        System.out.println("Add Content Type?(pdfFile/doc/slides) y/n?");
-        choose = input.next();
-        if (!choose.equals("y")) {
-            mc.adminMenu();
-        }
         destPath = destPath + "/" + contentName;
         contentType = fac.addFaculty("Document", destPath);
         System.out.println("---------------------");
-        System.out.println("---------------------");
-        System.out.println("upload file? y/n??");
-        choose = input.next();
-        if (!choose.equals("y")) {
-            mc.adminMenu();
-        }
-        destPath = destPath + "/" + contentType+ "/";
+        destPath = destPath + "/" + contentType + "/";
         fp.toUpload("srcPath", "fileName", destPath);
-        System.out.println("---------------------");
         System.out.println("---------------------");
 
     }

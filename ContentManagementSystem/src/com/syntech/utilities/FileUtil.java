@@ -62,15 +62,14 @@ public class FileUtil implements CopyPasteFile {
         }
     }
 
-    /* public void copy(String srcPath, String destPath) {
+    public void copy(String srcPath, String destPath) {
         Scanner scan = new Scanner(System.in);
         System.out.println("Enter the Source Path");
         srcPath = scan.next();
         System.out.println("Enter the Destination Path");
-        
 
-        }
-     */
+    }
+
     @Override
     public String createDirIfNotExist(String srcPath, String destPath) {
 
@@ -84,12 +83,7 @@ public class FileUtil implements CopyPasteFile {
         fileExtension = dests[dests.length - 1];
         if (!srcPathExtension.equals(fileExtension)) {
             if (!isDirExist(srcPathExtension)) {
-//                destPath = destPath.replace(fileExtension, srcPathExtension);
-//                File theDir = new File(destPath);
-//                if (!theDir.exists()) {
-//                    theDir.mkdirs();
-//                }
-                destPath = destPath.replace(fileExtension + "/", "");
+                destPath = destPath.replace(fileExtension, "");
                 DirectoryConfig directoryConfig = new DirectoryConfig();
                 directoryConfig.makeDirectory(destPath, srcPathExtension);
             }
