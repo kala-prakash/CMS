@@ -5,8 +5,7 @@
  */
 package com.syntech.controller;
 
-import java.io.File;
-import java.io.FileFilter;
+import com.syntech.utilities.DirectoryConfig;
 import java.util.Scanner;
 
 /**
@@ -15,38 +14,21 @@ import java.util.Scanner;
  */
 public class FacultyController {
 
-    static FacultyController fac = new FacultyController();
+    DirectoryConfig dirConfig = new DirectoryConfig();
 
-    public void addFaculty() {
-        System.out.println("Enter the Faculty Name:");
-        Scanner scan = new Scanner(System.in);
-        FilesController.facultyName = scan.next();
+    Scanner scan = new Scanner(System.in);
 
-        File theDir = new File(FilesController.basePath + "/" + FilesController.facultyName);
-
-        if (!theDir.exists()) {
-            theDir.mkdirs();
-        }
-
+    public String addFaculty(String table, String path) {
+        System.out.println("Enter the " + table + "  Name:");
+        String facultyName = scan.next();
+        dirConfig.makeDirectory(path, facultyName);
+        return facultyName;
     }
 
     public void viewFaculty() {
+        System.out.println("Enter the path: ");
+        String filePath = scan.next();
+        dirConfig.listDirectory(filePath);
 
-        File dir = new File(FilesController.basePath);
-        File[] files = dir.listFiles();
-        FileFilter fileFilter = new FileFilter() {
-            @Override
-            public boolean accept(File file) {
-                return file.isDirectory();
-            }
-        };
-        files = dir.listFiles(fileFilter);
-        if (files.length == 0) {
-            System.out.println("Either dir does not exist or is not a directory");
-        } else {
-            for (File filename : files) {
-                System.out.println(filename.toString());
-            }
-        }
     }
 }

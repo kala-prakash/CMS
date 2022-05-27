@@ -5,8 +5,7 @@
  */
 package com.syntech.controller;
 
-import java.io.File;
-import java.io.FileFilter;
+import com.syntech.utilities.DirectoryConfig;
 import java.util.Scanner;
 
 /**
@@ -15,38 +14,22 @@ import java.util.Scanner;
  */
 public class ContentTypeController {
 
-    static ContentTypeController contType = new ContentTypeController();
+    
+    DirectoryConfig dirConfig = new DirectoryConfig();
+    Scanner scan = new Scanner(System.in);
 
     public void addContentType() {
         System.out.println("Enter the content type:");
-        Scanner scan = new Scanner(System.in);
-        FilesController.contentType = scan.next();
+        String contentType = scan.next();
+        System.out.println("Enter the path");
+        String path = scan.next();
+        dirConfig.makeDirectory(path, contentType);
 
-        File theDir = new File(FilesController.basePath + "/" + FilesController.facultyName + "/" + FilesController.semesterName + "/" + FilesController.subjectName + "/" + FilesController.contentName + "/" + FilesController.contentType);
-        if (!theDir.exists()) {
-            theDir.mkdirs();
-        }
     }
 
     public void viewContentType() {
-
-        File dir = new File(FilesController.basePath + "/" + FilesController.facultyName + "/" + FilesController.semesterName + "/" + FilesController.subjectName + "/" + FilesController.contentName);
-        File[] files = dir.listFiles();
-        FileFilter fileFilter = new FileFilter() {
-            @Override
-            public boolean accept(File file) {
-                return file.isDirectory();
-            }
-        };
-        files = dir.listFiles(fileFilter);
-        if (files.length == 0) {
-            System.out.println("Either dir does not exist or is not a directory");
-        } else {
-            for (File filename : files) {
-                System.out.println(filename.toString());
-            }
-        }
+        System.out.println("Enter the file path");
+        String path = scan.next();
+        dirConfig.listDirectory(path);
     }
-
-    
 }

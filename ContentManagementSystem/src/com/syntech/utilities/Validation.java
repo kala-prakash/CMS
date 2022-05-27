@@ -45,4 +45,15 @@ public class Validation {
     return (m.find()) && m.group().equals(userName);
     }
     
+    public static boolean semesterValidation(String name){
+        boolean result = false;
+    for(EnumSem elem: EnumSem.values()){
+                if(name.equalsIgnoreCase(elem.toString())){
+                    result =true;
+                    break;
+                }
+            
+            }
+    return result;
+    }
 }

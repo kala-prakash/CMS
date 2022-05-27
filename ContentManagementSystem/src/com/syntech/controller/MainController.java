@@ -9,10 +9,13 @@ public class MainController {
     public static void main(String[] args) throws NoSuchAlgorithmException, IOException, SQLException {
 
         MenuController mc = new MenuController();
-       
+        
         mc.mainMenu();
         
         mc.adminMenu();
+        
+        
+        
         
     }
 }

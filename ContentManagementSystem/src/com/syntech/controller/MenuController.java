@@ -8,9 +8,7 @@ package com.syntech.controller;
 import com.syntech.repository.UserRepository;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
-import java.sql.Connection;
 import java.sql.SQLException;
-import static java.time.Clock.system;
 import java.util.Scanner;
 
 /**
@@ -22,10 +20,10 @@ public class MenuController {
     LoginController lc = new LoginController();
     RegistrationController rc = new RegistrationController();
     UserRepository ur = new UserRepository();
-    FilesController fc = new FilesController();
+    BaseConfigController fc = new BaseConfigController();
    static MenuController mc = new MenuController();
 
-    public void mainMenu() {
+    public void mainMenu() throws SQLException {
         String optionSelected;
         System.out.println("----------------------");
         System.out.println("1) Login as admin");
@@ -46,7 +44,8 @@ public class MenuController {
             System.out.println("------------------");
             lc.login();
         }else if(optionSelected.equals("3")){
-            System.out.println("Exiting...");
+            //content.addContent();
+           System.out.println("Exiting...");
             System.exit(0);
         } else {
             System.out.println("Enter the valid Option");

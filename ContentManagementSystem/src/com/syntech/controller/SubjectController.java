@@ -5,8 +5,7 @@
  */
 package com.syntech.controller;
 
-import java.io.File;
-import java.io.FileFilter;
+import com.syntech.utilities.DirectoryConfig;
 import java.util.Scanner;
 
 /**
@@ -16,38 +15,22 @@ import java.util.Scanner;
 public class SubjectController {
 
     static SubjectController subControl = new SubjectController();
+    DirectoryConfig dirConfig = new DirectoryConfig();
+    Scanner scan = new Scanner(System.in);
 
     public void addSubject() {
         System.out.println("Enter the Subject Name:");
-        Scanner scan = new Scanner(System.in);
+        String subjectName = scan.next();
+        System.out.println("Enter the path: ");
+        String path = scan.next();
+        dirConfig.makeDirectory(path, subjectName);
 
-        FilesController.subjectName = scan.next();
-
-        File theDir = new File(FilesController.basePath + "/" + FilesController.facultyName + "/" + FilesController.semesterName + "/" + FilesController.subjectName);
-        if (!theDir.exists()) {
-            theDir.mkdirs();
-        }
     }
 
     public void viewSubject() {
 
-        File dir = new File(FilesController.basePath + "/" + FilesController.facultyName + "/" + FilesController.semesterName);
-        File[] files = dir.listFiles();
-        FileFilter fileFilter = new FileFilter() {
-            @Override
-            public boolean accept(File file) {
-                return file.isDirectory();
-            }
-        };
-        files = dir.listFiles(fileFilter);
-        if (files.length == 0) {
-            System.out.println("Either dir does not exist or is not a directory");
-        } else {
-            for (File filename : files) {
-                System.out.println(filename.toString());
-            }
-        }
+        System.out.println("Enter the path: ");
+        String filePath = scan.next();
+        dirConfig.listDirectory(filePath);
     }
-
-    
 }

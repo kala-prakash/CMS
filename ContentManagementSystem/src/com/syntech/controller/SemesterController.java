@@ -5,8 +5,7 @@
  */
 package com.syntech.controller;
 
-import java.io.File;
-import java.io.FileFilter;
+import com.syntech.utilities.DirectoryConfig;
 import java.util.Scanner;
 
 /**
@@ -15,40 +14,21 @@ import java.util.Scanner;
  */
 public class SemesterController {
 
-    static SemesterController sc = new SemesterController();
+    DirectoryConfig dirConfig = new DirectoryConfig();
+    Scanner scan = new Scanner(System.in);
 
-    public void addSemester() {
+    public String addSemester(String path) {
+
         System.out.println("Enter the Semester:");
         System.out.println("[First, Second, Third, Fourth, Fifth, Sixth, Seventh, Eighth]");
-        Scanner scan = new Scanner(System.in);
-
-        FilesController.semesterName = scan.next();
-
-        File theDir = new File(FilesController.basePath + "/" + FilesController.facultyName + "/" + FilesController.semesterName);
-        if (!theDir.exists()) {
-            theDir.mkdirs();
-        }
+        String semesterName = scan.next();
+        dirConfig.makeDirectory("/" + path + "/", semesterName);
+        return semesterName;
     }
 
     public void viewSemester() {
-
-        File dir = new File(FilesController.basePath + "/" + FilesController.facultyName);
-        File[] files = dir.listFiles();
-        FileFilter fileFilter = new FileFilter() {
-            @Override
-            public boolean accept(File file) {
-                return file.isDirectory();
-            }
-        };
-        files = dir.listFiles(fileFilter);
-        if (files.length == 0) {
-            System.out.println("Either dir does not exist or is not a directory");
-        } else {
-            for (File filename : files) {
-                System.out.println(filename.toString());
-            }
-        }
+        System.out.println("Enter the path: ");
+        String filePath = scan.next();
+        dirConfig.listDirectory(filePath);
     }
-
-   
 }

@@ -9,6 +9,8 @@ import static com.syntech.controller.MenuController.mc;
 import static com.syntech.db.Mysqlcon.doConnection;
 import com.syntech.model.Student;
 import com.syntech.repository.StudentRepository;
+import com.syntech.utilities.EnumSem;
+import com.syntech.utilities.Validation;
 import static com.syntech.utilities.Validation.verifyEmail;
 import static com.syntech.utilities.Validation.verifyName;
 import static com.syntech.utilities.Validation.verifyPhone;
@@ -34,32 +36,28 @@ public class RegistrationController {
         Scanner input = new Scanner(System.in);
 
         try {
-            String sql = "INSERT INTO Student(studentID,name,facultyName,semesterName,email,phone,address,startDate,endDate) VALUES (?,?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO Student(id,name,facultyName,semesterName,email,phone,address,startDate,endDate) VALUES (?,?,?,?,?,?,?,?,?)";
 
             System.out.println("------------------------");
             System.out.println("Enter the Student name :");
             String name = input.nextLine();
-            if (!verifyName(name)) {
+            while (!verifyName(name)) {
                 System.out.println("please enter the valid name!!");
-                mc.registerMenu();
+                name = input.nextLine();
             }
-            System.out.println("------------------------");
-            System.out.println("Enter the Student ID");
-            System.out.println("------------------------");
-            Long studentID = input.nextLong();
             System.out.println("------------------------");
             System.out.println("Enter Email");
             String email = input.next();
-            if (!verifyEmail(email)) {
+            while (!verifyEmail(email)) {
                 System.out.println("Please enter the valid email");
-                mc.registerMenu();
+                email = input.next();
             }
             System.out.println("------------------------");
             System.out.println("Enter phone no.");
             String phone = input.next();
-            if (!verifyPhone(phone)) {
-                System.out.println("Invalid phone no.!!");
-                mc.registerMenu();
+            while (!verifyPhone(phone)) {
+                System.out.println("pleave enter the valid phone no.!!");
+                phone = input.next();
             }
             System.out.println("Enter Address");
             String address = input.next();
@@ -71,10 +69,12 @@ public class RegistrationController {
             System.out.println("Enter the Semester");
             System.out.println("[First, Second, Third, Fourth, Fifth, Sixth, Seventh, Eighth]");
             String semesterName = input.next();
-            if (!(semesterName.equals("First") || semesterName.equals("Second") || semesterName.equals("Third") || semesterName.equals("Fourth"))
-                    && !(semesterName.equals("Fifth") || semesterName.equals("Sixth") || semesterName.equals("Seventh") || semesterName.equals("Eighth"))) {
-                System.out.println("Invalid Option");
-                mc.registerMenu();
+            Object[] enumValues = EnumSem.values();
+            boolean result = Validation.semesterValidation(semesterName);
+            while (!result) {
+                System.out.println("Invalid input...");
+                semesterName = input.next();
+                result = Validation.semesterValidation(semesterName);
             }
             System.out.println("------------------------");
             System.out.println("Enter the starting year");
@@ -86,7 +86,7 @@ public class RegistrationController {
             // Student stud = new Student(id, name, facultyName, semesterName, email, phone, address, startDate, endDate);
             //sr.addStudent(stud);
             PreparedStatement pstmt = doConnection().prepareStatement(sql);
-            pstmt.setLong(1, studentID);
+            pstmt.setLong(1, 1);
             pstmt.setString(2, name);
             pstmt.setString(3, facultyName);
             pstmt.setString(4, semesterName);
@@ -99,7 +99,7 @@ public class RegistrationController {
             pstmt.executeUpdate();
             System.out.println("Student added successfully");
             mc.registerMenu();
-        } catch (Exception e) {
+        } catch (IOException | NoSuchAlgorithmException | SQLException e) {
             System.out.println(e);
         } finally {
             doConnection().close();
@@ -124,7 +124,7 @@ public class RegistrationController {
                 String endDate = rs.getString("endDate");
 
                 System.out.println(studentID + " " + Name + " " + facultyName + " " + semesterName + "  " + email + " " + phone + " " + address + "  " + startDate + " " + endDate);
-            
+
             }
         } catch (SQLException e) {
             System.out.println(e);

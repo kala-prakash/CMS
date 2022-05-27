@@ -5,7 +5,6 @@
  */
 package com.syntech.model;
 
-
 import java.util.Objects;
 
 /**
@@ -14,29 +13,26 @@ import java.util.Objects;
  */
 public class User {
 
-    private Long id;
+    private Long userId;
     private String username;
     private String password;
-    
+
     public User() {
-        
-        
+
     }
 
     public User(Long id, String username, String password) {
-        this.id = id;
+        this.userId = id;
         this.username = username;
         this.password = password;
     }
 
-    
-     
-    public Long getId() {
-        return id;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getUsername() {
@@ -54,14 +50,11 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-        
-     
-     
-    
+
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 71 * hash + Objects.hashCode(this.id);
+        hash = 71 * hash + Objects.hashCode(this.userId);
         hash = 71 * hash + Objects.hashCode(this.username);
         hash = 71 * hash + Objects.hashCode(this.password);
         return hash;
@@ -85,7 +78,7 @@ public class User {
         if (!Objects.equals(this.password, other.password)) {
             return false;
         }
-        if (!Objects.equals(this.id, other.id)) {
+        if (!Objects.equals(this.userId, other.userId)) {
             return false;
         }
         return true;
@@ -93,7 +86,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" + "id=" + id + ", username=" + username + ", password=" + password + '}';
+        return "User{" + "id=" + userId + ", username=" + username + ", password=" + password + '}';
     }
 
 }

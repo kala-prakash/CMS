@@ -13,8 +13,7 @@ public class Semester {
 
     private Long id;
     private String name;
-
-    Subject sub = new Subject();
+    private Long subId;
 
     public Semester() {
     }
@@ -40,12 +39,12 @@ public class Semester {
         this.name = name;
     }
 
-    public Subject getSub() {
-        return sub;
+    public Long getSubId() {
+        return subId;
     }
 
-    public void setSub(Subject sub) {
-        this.sub = sub;
+    public void setSubId(Long subId) {
+        this.subId = subId;
     }
 
 }
