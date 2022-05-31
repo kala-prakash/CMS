@@ -8,6 +8,7 @@ package com.syntech.repository;
 import static com.syntech.db.Mysqlcon.doConnection;
 import com.syntech.model.Faculty;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +49,26 @@ public class FacultyRepository {
             doConnection().close();
     }
     }
+    public Long checkFacultyId(String name) throws SQLException{
+        try{
+         Long facId=null;
+    String sql = "select id from faculty where name= ?";
+    PreparedStatement pstmt = doConnection().prepareStatement(sql);
+    pstmt.setString(1,name);
+    ResultSet rs=pstmt.executeQuery();
+    while(rs.next()){
+        facId=rs.getLong(1);
+        return facId;
+    }    
+    }        
+       catch(SQLException e){
+           System.out.println(e);
+       }
+        finally{
+            doConnection().close();           
+        }
+        return null;   
+}
 
 }    
 

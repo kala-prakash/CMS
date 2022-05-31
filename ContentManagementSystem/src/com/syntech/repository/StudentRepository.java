@@ -33,30 +33,25 @@ public class StudentRepository {
     }
 
     public void registerStudentQuery(Student stud) throws SQLException {
-    
-        try{
-        String sql = "INSERT INTO student(id,name,fac_id,sem_id,semester_name,faculty_name,email,phone,address,start_date,end_date) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
-        PreparedStatement pstmt = doConnection().prepareStatement(sql);
-        pstmt.setLong(1,1);
-        pstmt.setLong(3, );
-        pstmt.setLong(4, ); 
-        pstmt.setString(7, stud.getEmail());
-        pstmt.setString(8, stud.getPhone());
-        pstmt.setString(9, stud.getAddress());
-        pstmt.setString(10, stud.getStartDate());
-        pstmt.setString(11, stud.getEndDate());
-        pstmt.executeUpdate();
-        System.out.println("Student added successfully");
-    }
-    catch (SQLException e) {
+
+        try {
+            String sql = "INSERT INTO student(name,fac_id,sem_id,email,phone,address,start_date,end_date) VALUES (?,?,?,?,?,?,?,?)";
+            PreparedStatement pstmt = doConnection().prepareStatement(sql);
+            pstmt.setString(1, stud.getStudentName());
+            pstmt.setLong(2, stud.getFacultyId());
+            pstmt.setLong(3, stud.getSemesterId());
+            pstmt.setString(4, stud.getEmail());
+            pstmt.setString(5, stud.getPhone());
+            pstmt.setString(6, stud.getAddress());
+            pstmt.setString(7, stud.getStartDate());
+            pstmt.setString(8, stud.getEndDate());
+            pstmt.executeUpdate();
+            System.out.println("Student added successfully");
+        } catch (SQLException e) {
             System.out.println(e);
-    }
-            finally {
+        } finally {
             doConnection().close();
-    }
+        }
     }
 
-   
 }
-
-

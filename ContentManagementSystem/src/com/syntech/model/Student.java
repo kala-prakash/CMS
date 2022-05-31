@@ -28,7 +28,7 @@ public class Student {
 
     }
 
-    public Student(Long id, String studentName, Long facultyId, Long semesterId,String email, String phone, String address, String startDate, String endDate) {
+    public Student(Long id, String studentName, Long semesterId, Long facultyId, String email, String phone, String address, String startDate, String endDate) {
         this.id = id;
         this.studentName = studentName;
         this.facultyId = facultyId;

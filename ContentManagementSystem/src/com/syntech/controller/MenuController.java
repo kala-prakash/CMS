@@ -24,6 +24,9 @@ public class MenuController {
     static MenuController mc = new MenuController();
     FacultyController facc = new FacultyController();
     SemesterController semc = new SemesterController();
+    SubjectController subControl = new SubjectController();
+    ContentController cr = new ContentController();
+    ContentTypeController contType = new ContentTypeController();
 
     public void mainMenu() throws SQLException, NoSuchAlgorithmException, IOException {
         String optionSelected;
@@ -62,7 +65,7 @@ public class MenuController {
         System.out.println("3) Register Student..");
         System.out.println("4) Sign up new user..");
         System.out.println("5) Manage Cirriculam..");
-        System.out.println("5) Return to the main menu..");
+        System.out.println("6) Return to the main menu..");
         System.out.println("--------------");
 
         String optionSelected = input.next();
@@ -153,7 +156,7 @@ public class MenuController {
     public void semesterMenu() throws SQLException, NoSuchAlgorithmException, IOException {
         Scanner input = new Scanner(System.in);
         int inp;
-        System.out.println("1) Add Semeser?");
+        System.out.println("1) Add Semester?");
         System.out.println("2) Update Semester details?");
         System.out.println("3) Return....");
         inp = input.nextInt();
@@ -180,7 +183,9 @@ public class MenuController {
         inp = input.nextInt();
         switch (inp) {
             case 1:
-                
+                for(int i =0; i<=8; i++){
+                subControl.addSub();
+                }
                 break;
             case 2:
                 break;
@@ -202,7 +207,7 @@ public class MenuController {
         inp = input.nextInt();
         switch (inp) {
             case 1:
-                
+                cr.addCont();
                 break;
             case 2:
                 break;
@@ -223,7 +228,9 @@ public class MenuController {
         inp = input.nextInt();
         switch (inp) {
             case 1:
-                
+                for(int i = 0; i<= 2; i++){
+                contType.addContType();
+                }
                 break;
             case 2:
                 break;
@@ -250,10 +257,12 @@ public class MenuController {
                  this.facultyMenu();
                  break;
              case 2:
-                 this.semesterMenu();
+                this.semesterMenu();
                  break;
              case 3:
+                 for(int i = 0; i<=5;i++){
                  this.subjectMenu();
+                 }
                  break;
              case 4:
                  this.contentMenu();

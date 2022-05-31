@@ -25,7 +25,7 @@ public class SemesterRepository {
         return semesterList;
     }
 
-    public void setFacultyList(List<Semester> semesterList) {
+    public void setSemesterList(List<Semester> semesterList) {
         this.semesterList = semesterList;
     }
 
@@ -35,10 +35,9 @@ public class SemesterRepository {
     
     public void semesterQuery(Semester sem) throws SQLException{
     try{
-    String sql = "INSERT INTO semester(name,faculty_id) VALUES (?,?)";
+    String sql = "INSERT INTO semester(name) VALUES (?)";
     PreparedStatement pstmt = doConnection().prepareStatement(sql);
     pstmt.setString(1, sem.getName());
-    pstmt.setLong(2,sem.getFacultyId());
     pstmt.executeUpdate();
         System.out.println("Added Succefully");
         
@@ -51,19 +50,17 @@ public class SemesterRepository {
     }
     }
     
-    public Long checkId(String name) throws SQLException{
+    public Long checkSemesterId(String name) throws SQLException{
         try{
-         Long facId=null;
-    String sql = "select id from faculty where name= ?";
+         Long semId=null;
+    String sql = "select id from semester where name= ?";
     PreparedStatement pstmt = doConnection().prepareStatement(sql);
     pstmt.setString(1,name);
     ResultSet rs=pstmt.executeQuery();
-    System.out.println(rs);
     while(rs.next()){
-        facId=rs.getLong(1);
-        return facId;
+        semId=rs.getLong(1);
+        return semId;
     }    
-    System.out.println(facId);
     }        
        catch(SQLException e){
            System.out.println(e);

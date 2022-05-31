@@ -19,11 +19,13 @@ public class ContentType {
     public ContentType() {
     }
 
-    public ContentType(Long id, String name, String extension) {
+    public ContentType(Long id, String name, String extension, Long contentId) {
         this.id = id;
         this.name = name;
         this.extension = extension;
+        this.contentId = contentId;
     }
+    
 
     public Long getId() {
         return id;

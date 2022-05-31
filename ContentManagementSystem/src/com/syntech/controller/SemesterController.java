@@ -6,6 +6,7 @@
 package com.syntech.controller;
 
 import com.syntech.model.Semester;
+import com.syntech.repository.FacultyRepository;
 import com.syntech.repository.SemesterRepository;
 import com.syntech.utilities.DirectoryConfig;
 import java.sql.SQLException;
@@ -18,6 +19,7 @@ import java.util.Scanner;
 public class SemesterController {
 
     SemesterRepository semr = new SemesterRepository();
+    FacultyRepository fr = new FacultyRepository();
 
     DirectoryConfig dirConfig = new DirectoryConfig();
     Scanner scan = new Scanner(System.in);
@@ -36,15 +38,7 @@ public class SemesterController {
         Scanner scan = new Scanner(System.in);
         System.out.println("Enter the Semester Name:");
         String semesterName = scan.next();
-        System.out.println("Enter the faculty Name:");
-        String facultyName = scan.next();
-        Long facId = sr.checkId(facultyName);
-        System.out.println(facId);
-        if (facId == null) {
-            System.out.println("Did not find id:");
-            return;
-        }
-        Semester sem = new Semester(null, semesterName, facId);
+        Semester sem = new Semester(null, semesterName);
         semr.addingSemester(sem);
         semr.semesterQuery(sem);
 

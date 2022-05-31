@@ -10,18 +10,20 @@ package com.syntech.model;
  * @author kala
  */
 public class Subject {
+
     private Long id;
     private String name;
     private Long semId;
-    
-    Content cont = new Content();
+    private Long facId;
 
     public Subject() {
     }
 
-    public Subject(Long id, String name) {
+    public Subject(Long id, String name, Long semId, Long facId) {
         this.id = id;
         this.name = name;
+        this.semId = semId;
+        this.facId = facId;
     }
 
     public Long getId() {
@@ -40,14 +42,19 @@ public class Subject {
         this.name = name;
     }
 
-    public long getSemId() {
+    public Long getSemId() {
         return semId;
     }
 
-    public void setSemId(long semId) {
+    public void setSemId(Long semId) {
         this.semId = semId;
     }
-    
-    
-    
+
+    public Long getFacId() {
+        return facId;
+    }
+
+    public void setFacId(Long facId) {
+        this.facId = facId;
+    }
 }

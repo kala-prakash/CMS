@@ -16,11 +16,10 @@ import java.util.Scanner;
  * @author kala
  */
 public class FacultyController {
+
     Faculty fac = new Faculty();
     FacultyRepository fr = new FacultyRepository();
-
     DirectoryConfig dirConfig = new DirectoryConfig();
-
     Scanner scan = new Scanner(System.in);
 
     public String addFaculty(String table, String path) {
@@ -30,14 +29,13 @@ public class FacultyController {
         return facultyName;
     }
 
-    public void addingFaculty() throws SQLException{
+    public void addingFaculty() throws SQLException {
         Scanner scan = new Scanner(System.in);
         System.out.println("Enter the facultyName:");
         String facultyName = scan.next();
-        Faculty fac = new Faculty(null,facultyName);
+        Faculty fac = new Faculty(null, facultyName);
         fr.addingFaculty(fac);
         fr.addFacultyQuery(fac);
     }
-    
-    
+
 }

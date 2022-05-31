@@ -19,11 +19,13 @@ public class Content {
     public Content() {
     }
 
-    public Content(Long id, String name, String docPath) {
+    public Content(Long id, String name, String docPath, Long subId) {
         this.id = id;
         this.name = name;
         this.docPath = docPath;
+        this.subId = subId;
     }
+
 
     public Long getId() {
         return id;
