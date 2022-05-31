@@ -12,6 +12,7 @@ package com.syntech.model;
 public class Subject {
     private Long id;
     private String name;
+    private Long semId;
     
     Content cont = new Content();
 
@@ -38,6 +39,15 @@ public class Subject {
     public void setName(String name) {
         this.name = name;
     }
+
+    public long getSemId() {
+        return semId;
+    }
+
+    public void setSemId(long semId) {
+        this.semId = semId;
+    }
+    
     
     
 }

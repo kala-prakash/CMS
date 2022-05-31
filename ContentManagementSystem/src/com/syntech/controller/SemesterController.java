@@ -5,7 +5,10 @@
  */
 package com.syntech.controller;
 
+import com.syntech.model.Semester;
+import com.syntech.repository.SemesterRepository;
 import com.syntech.utilities.DirectoryConfig;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 /**
@@ -14,8 +17,11 @@ import java.util.Scanner;
  */
 public class SemesterController {
 
+    SemesterRepository semr = new SemesterRepository();
+
     DirectoryConfig dirConfig = new DirectoryConfig();
     Scanner scan = new Scanner(System.in);
+    SemesterRepository sr = new SemesterRepository();
 
     public String addSemester(String path) {
 
@@ -26,9 +32,21 @@ public class SemesterController {
         return semesterName;
     }
 
-    public void viewSemester() {
-        System.out.println("Enter the path: ");
-        String filePath = scan.next();
-        dirConfig.listDirectory(filePath);
+    public void addSem() throws SQLException {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Enter the Semester Name:");
+        String semesterName = scan.next();
+        System.out.println("Enter the faculty Name:");
+        String facultyName = scan.next();
+        Long facId = sr.checkId(facultyName);
+        System.out.println(facId);
+        if (facId == null) {
+            System.out.println("Did not find id:");
+            return;
+        }
+        Semester sem = new Semester(null, semesterName, facId);
+        semr.addingSemester(sem);
+        semr.semesterQuery(sem);
+
     }
 }

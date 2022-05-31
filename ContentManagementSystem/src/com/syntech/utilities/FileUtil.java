@@ -25,6 +25,8 @@ interface CopyPasteFile {
 
     public Boolean isDirExist(String dirPath);
 
+    public void copy(String srcPath, String destPath);
+
 }
 
 public class FileUtil implements CopyPasteFile {
@@ -60,45 +62,54 @@ public class FileUtil implements CopyPasteFile {
             }
             System.out.println("Successful...");
         }
+
     }
 
+    @Override
     public void copy(String srcPath, String destPath) {
         Scanner scan = new Scanner(System.in);
         System.out.println("Enter the Source Path");
         srcPath = scan.next();
         System.out.println("Enter the Destination Path");
-
+        destPath = scan.next();
+       
     }
 
-    @Override
-    public String createDirIfNotExist(String srcPath, String destPath) {
+        @Override
+        public String createDirIfNotExist
+        (String srcPath, String destPath
+        
+            ) {
 
         String srcPathExtension = "";
-        String fileExtension = "";
-        int i = srcPath.lastIndexOf('.');
-        if (i > 0) {
-            srcPathExtension = srcPath.substring(i + 1);
-        }
-        String[] dests = destPath.split("/");
-        fileExtension = dests[dests.length - 1];
-        if (!srcPathExtension.equals(fileExtension)) {
-            if (!isDirExist(srcPathExtension)) {
-                destPath = destPath.replace(fileExtension, "");
-                DirectoryConfig directoryConfig = new DirectoryConfig();
-                directoryConfig.makeDirectory(destPath, srcPathExtension);
+            String fileExtension = "";
+            int i = srcPath.lastIndexOf('.');
+            if (i > 0) {
+                srcPathExtension = srcPath.substring(i + 1);
             }
+            String[] dests = destPath.split("/");
+            fileExtension = dests[dests.length - 1];
+            if (!srcPathExtension.equals(fileExtension)) {
+                if (!isDirExist(srcPathExtension)) {
+                    destPath = destPath.replace(fileExtension, "");
+                    DirectoryConfig directoryConfig = new DirectoryConfig();
+                    directoryConfig.makeDirectory(destPath, srcPathExtension);
+                }
 
+            }
+            return destPath;
         }
-        return destPath;
-    }
 
-    @Override
-    public Boolean isDirExist(String dirPath) {
+        @Override
+        public Boolean isDirExist
+        (String dirPath
+        
+            ) {
         File f = new File(dirPath);
-        if (f.isDirectory()) {
-            System.out.println("Yes it is present..");
-            return true;
+            if (f.isDirectory()) {
+                System.out.println("Yes it is present..");
+                return true;
+            }
+            return false;
         }
-        return false;
     }
-}

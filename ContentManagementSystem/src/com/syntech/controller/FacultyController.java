@@ -5,7 +5,10 @@
  */
 package com.syntech.controller;
 
+import com.syntech.model.Faculty;
+import com.syntech.repository.FacultyRepository;
 import com.syntech.utilities.DirectoryConfig;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 /**
@@ -13,6 +16,8 @@ import java.util.Scanner;
  * @author kala
  */
 public class FacultyController {
+    Faculty fac = new Faculty();
+    FacultyRepository fr = new FacultyRepository();
 
     DirectoryConfig dirConfig = new DirectoryConfig();
 
@@ -25,10 +30,14 @@ public class FacultyController {
         return facultyName;
     }
 
-    public void viewFaculty() {
-        System.out.println("Enter the path: ");
-        String filePath = scan.next();
-        dirConfig.listDirectory(filePath);
-
+    public void addingFaculty() throws SQLException{
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Enter the facultyName:");
+        String facultyName = scan.next();
+        Faculty fac = new Faculty(null,facultyName);
+        fr.addingFaculty(fac);
+        fr.addFacultyQuery(fac);
     }
+    
+    
 }

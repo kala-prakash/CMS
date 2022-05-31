@@ -10,12 +10,9 @@ package com.syntech.model;
  * @author kala
  */
 public class Faculty {
+
     private Long id;
     private String facultyName;
-    
-    Semester sem = new Semester();
-    
-    
 
     public Faculty() {
     }
@@ -41,6 +38,4 @@ public class Faculty {
         this.facultyName = facultyName;
     }
 
-    
-    
 }

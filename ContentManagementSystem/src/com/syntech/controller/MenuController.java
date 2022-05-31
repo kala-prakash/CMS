@@ -21,9 +21,11 @@ public class MenuController {
     RegistrationController rc = new RegistrationController();
     UserRepository ur = new UserRepository();
     BaseConfigController fc = new BaseConfigController();
-   static MenuController mc = new MenuController();
+    static MenuController mc = new MenuController();
+    FacultyController facc = new FacultyController();
+    SemesterController semc = new SemesterController();
 
-    public void mainMenu() throws SQLException {
+    public void mainMenu() throws SQLException, NoSuchAlgorithmException, IOException {
         String optionSelected;
         System.out.println("----------------------");
         System.out.println("1) Login as admin");
@@ -35,7 +37,6 @@ public class MenuController {
         Scanner input = new Scanner(System.in);
         optionSelected = input.next();
         if (optionSelected.equals("1")) {
-
             System.out.println("Logging in as admin....");
             System.out.println("------------------");
             lc.loginAdmin();
@@ -43,9 +44,8 @@ public class MenuController {
             System.out.println("Logging in as student....");
             System.out.println("------------------");
             lc.login();
-        }else if(optionSelected.equals("3")){
-            //content.addContent();
-           System.out.println("Exiting...");
+        } else if (optionSelected.equals("3")) {
+            System.out.println("Exiting...");
             System.exit(0);
         } else {
             System.out.println("Enter the valid Option");
@@ -61,6 +61,7 @@ public class MenuController {
         System.out.println("2) Delete an existing File?");
         System.out.println("3) Register Student..");
         System.out.println("4) Sign up new user..");
+        System.out.println("5) Manage Cirriculam..");
         System.out.println("5) Return to the main menu..");
         System.out.println("--------------");
 
@@ -79,7 +80,9 @@ public class MenuController {
                 lc.signUp();
                 break;
             case "5":
-                
+                this.cirriculamManagementMenu();
+                break;
+            case "6":
                 this.mainMenu();
             default:
                 System.out.println("Please enter the valid optioin");
@@ -87,8 +90,8 @@ public class MenuController {
                 break;
         }
     }
-    
-    public void registerMenu() throws SQLException, IOException, NoSuchAlgorithmException{
+
+    public void registerMenu() throws SQLException, IOException, NoSuchAlgorithmException {
         Scanner input = new Scanner(System.in);
         int inp;
         System.out.println("1) Add Student ?");
@@ -96,13 +99,13 @@ public class MenuController {
         System.out.println("3) View Student Details ?");
         System.out.println("4) Delete Student Details ?");
         System.out.println("5) Return...");
-       
+
         inp = input.nextInt();
-        switch(inp){
+        switch (inp) {
             case 1:
                 rc.registerStudent();
                 break;
-                case 2:
+            case 2:
                 rc.updateStudentDetails();
                 break;
             case 3:
@@ -118,6 +121,153 @@ public class MenuController {
                 break;
         }
     }
+
+    public void facultyMenu() throws SQLException, NoSuchAlgorithmException, IOException {
+        Scanner input = new Scanner(System.in);
+        int inp;
+        System.out.println("1) Add Faculty?");
+        System.out.println("2) Update Faculty details?");
+        System.out.println("3) view Student Details ?");
+        System.out.println("4) Delete Student Details ?");
+        System.out.println("5) Return....");
+        inp = input.nextInt();
+        switch (inp) {
+            case 1:
+                facc.addingFaculty();
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                this.cirriculamManagementMenu();
+                break;
+            default:
+                this.facultyMenu();
+                break;
+        }
+    }
+
+    public void semesterMenu() throws SQLException, NoSuchAlgorithmException, IOException {
+        Scanner input = new Scanner(System.in);
+        int inp;
+        System.out.println("1) Add Semeser?");
+        System.out.println("2) Update Semester details?");
+        System.out.println("3) Return....");
+        inp = input.nextInt();
+        switch (inp) {
+            case 1:
+                semc.addSem();
+                break;
+            case 2:
+                break;
+            case 3:
+                this.cirriculamManagementMenu();
+                break;
+            default:
+                this.semesterMenu();
+                break;
+        }
+    }
+    public void subjectMenu() throws SQLException, NoSuchAlgorithmException, IOException {
+        Scanner input = new Scanner(System.in);
+        int inp;
+        System.out.println("1) Add Subject?");
+        System.out.println("2) Update Subject details?");
+        System.out.println("3) Return....");
+        inp = input.nextInt();
+        switch (inp) {
+            case 1:
+                
+                break;
+            case 2:
+                break;
+            case 3:
+                this.cirriculamManagementMenu();
+                break;
+            default:
+                this.subjectMenu();
+                break;
+        }
+    }
+    
+     public void contentMenu() throws SQLException, NoSuchAlgorithmException, IOException {
+        Scanner input = new Scanner(System.in);
+        int inp;
+        System.out.println("1) Add Content?");
+        System.out.println("2) Update Content details?");
+        System.out.println("3) Return....");
+        inp = input.nextInt();
+        switch (inp) {
+            case 1:
+                
+                break;
+            case 2:
+                break;
+            case 3:
+                this.cirriculamManagementMenu();
+                break;
+            default:
+                this.contentMenu();
+                break;
+        }
+    }
+     public void contentTypeMenu() throws SQLException, NoSuchAlgorithmException, IOException {
+        Scanner input = new Scanner(System.in);
+        int inp;
+        System.out.println("1) Add Content Type?");
+        System.out.println("2) Update Content Type details?");
+        System.out.println("3) Return....");
+        inp = input.nextInt();
+        switch (inp) {
+            case 1:
+                
+                break;
+            case 2:
+                break;
+            case 3:
+                this.cirriculamManagementMenu();
+                break;
+            default:
+                this.contentTypeMenu();
+                break;
+        }
+    }
+     
+     public void cirriculamManagementMenu() throws SQLException, NoSuchAlgorithmException, IOException{
+     Scanner input = new Scanner(System.in);
+         System.out.println("1) Faculty:");
+         System.out.println("2) Semester:");
+         System.out.println("3) Subject:");
+         System.out.println("4) Content:");
+         System.out.println("5) ContentType:");
+         System.out.println("6) Return...");
+         int inp = input.nextInt();
+         switch(inp){
+             case 1:
+                 this.facultyMenu();
+                 break;
+             case 2:
+                 this.semesterMenu();
+                 break;
+             case 3:
+                 this.subjectMenu();
+                 break;
+             case 4:
+                 this.contentMenu();
+                 break;
+             case 5:
+                 this.contentTypeMenu();
+                 break;
+             case 6:
+                 this.adminMenu();
+                 break;
+             default :
+                 this.cirriculamManagementMenu();
+                 break;    
+         }
+     }
+    
 }
-
-

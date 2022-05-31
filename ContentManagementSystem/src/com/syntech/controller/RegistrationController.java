@@ -9,8 +9,6 @@ import static com.syntech.controller.MenuController.mc;
 import static com.syntech.db.Mysqlcon.doConnection;
 import com.syntech.model.Student;
 import com.syntech.repository.StudentRepository;
-import com.syntech.utilities.EnumSem;
-import com.syntech.utilities.Validation;
 import static com.syntech.utilities.Validation.verifyEmail;
 import static com.syntech.utilities.Validation.verifyName;
 import static com.syntech.utilities.Validation.verifyPhone;
@@ -28,15 +26,14 @@ import java.util.Scanner;
  */
 public class RegistrationController {
 
-    public static Student stud = new Student();
+    ///public static Student stud = new Student();
     StudentRepository sr = new StudentRepository();
 
     public void registerStudent() throws SQLException, IOException, NoSuchAlgorithmException {
 
         Scanner input = new Scanner(System.in);
 
-        try {
-            String sql = "INSERT INTO Student(id,name,facultyName,semesterName,email,phone,address,startDate,endDate) VALUES (?,?,?,?,?,?,?,?,?)";
+       
 
             System.out.println("------------------------");
             System.out.println("Enter the Student name :");
@@ -60,55 +57,23 @@ public class RegistrationController {
                 phone = input.next();
             }
             System.out.println("Enter Address");
-            String address = input.next();
-            System.out.println("------------------------");
-            System.out.println("Enter the Faculty Name");
-            System.out.println("a) BCA b) BIM c) CSIT....");
-            String facultyName = input.next();
-            System.out.println("------------------------");
-            System.out.println("Enter the Semester");
-            System.out.println("[First, Second, Third, Fourth, Fifth, Sixth, Seventh, Eighth]");
-            String semesterName = input.next();
-            Object[] enumValues = EnumSem.values();
-            boolean result = Validation.semesterValidation(semesterName);
-            while (!result) {
-                System.out.println("Invalid input...");
-                semesterName = input.next();
-                result = Validation.semesterValidation(semesterName);
-            }
+            String address = input.next();            
             System.out.println("------------------------");
             System.out.println("Enter the starting year");
             String startDate = input.next();
             System.out.println("------------------------");
             System.out.println("Enter the ending year");
             String endDate = input.next();
-
-            // Student stud = new Student(id, name, facultyName, semesterName, email, phone, address, startDate, endDate);
-            //sr.addStudent(stud);
-            PreparedStatement pstmt = doConnection().prepareStatement(sql);
-            pstmt.setLong(1, 1);
-            pstmt.setString(2, name);
-            pstmt.setString(3, facultyName);
-            pstmt.setString(4, semesterName);
-            pstmt.setString(5, email);
-            pstmt.setString(6, phone);
-            pstmt.setString(7, address);
-            pstmt.setString(8, startDate);
-            pstmt.setString(9, endDate);
-
-            pstmt.executeUpdate();
-            System.out.println("Student added successfully");
+          
+            Student stud = new Student(null,name,null,null,email,phone,address,startDate,endDate);
+            sr.addStudent(stud);
+            sr.registerStudentQuery(stud);
             mc.registerMenu();
-        } catch (IOException | NoSuchAlgorithmException | SQLException e) {
-            System.out.println(e);
-        } finally {
-            doConnection().close();
-        }
     }
 
     public void viewStudentDetails() throws SQLException, IOException, NoSuchAlgorithmException {
         try {
-            String viewQuery = "SELECT * from Student";
+            String viewQuery = "SELECT * from student";
             Statement stmt = doConnection().createStatement();
             ResultSet rs = stmt.executeQuery(viewQuery);
             while (rs.next()) {
@@ -135,7 +100,7 @@ public class RegistrationController {
 
     public void deleteStudentDetails() throws SQLException, IOException, NoSuchAlgorithmException {
         try {
-            String delete_query = "DELETE FROM Student WHERE studentID = ?";
+            String delete_query = "DELETE FROM student WHERE studentID = ?";
             Scanner scan = new Scanner(System.in);
             System.out.println("Enter the Student_Id to delete:");
             Long studentID = scan.nextLong();
@@ -152,11 +117,11 @@ public class RegistrationController {
     }
 
     public void updateStudentDetails() throws SQLException, IOException, NoSuchAlgorithmException {
-        String updateQuery = "UPDATE Student set name=? where studentID=?";
+        String updateQuery = "UPDATE student set name=? where studentID=?";
         Scanner scan = new Scanner(System.in);
         System.out.println("Enter the Student Name:");
         String studentName = scan.nextLine();
-        System.out.println("Enter the Student_Id :");
+        System.out.println("Enter the student_Id :");
         Long studentID = scan.nextLong();
         try {
             PreparedStatement stmt = doConnection().prepareStatement(updateQuery);

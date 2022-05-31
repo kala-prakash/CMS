@@ -11,6 +11,7 @@ import com.syntech.model.User;
 import com.syntech.repository.UserRepository;
 import static com.syntech.utilities.Validation.verifyPassword;
 import static com.syntech.utilities.Validation.verifyUserName;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -29,7 +30,7 @@ public class LoginController {
     public static User u = new User();
     public static RegistrationController rc = new RegistrationController();
 
-    public void loginAdmin() throws SQLException {
+    public void loginAdmin() throws SQLException, NoSuchAlgorithmException, IOException {
         Scanner keyboard = new Scanner(System.in);
         System.out.println("Enter username: ");
         String inpUser = keyboard.nextLine();
@@ -44,7 +45,7 @@ public class LoginController {
 
     }
 
-    public void login() throws SQLException {
+    public void login() throws SQLException, NoSuchAlgorithmException, IOException {
 
         Scanner keyboard = new Scanner(System.in);
 
@@ -74,7 +75,12 @@ public class LoginController {
         byte[] hashedPasswod = null;
         try {
             String sql = "INSERT INTO User(userId,userName,Password) VALUES (?,?,?)";
-
+            System.out.println("Enter the Name:");
+            String name = keyboard.nextLine();
+            System.out.println("Enter the email:");
+            String email = keyboard.nextLine();
+            System.out.println("Enter the userType: Admin/General?");
+            String userType = keyboard.next();
             System.out.println("Enter username: ");
             System.out.println("------------------");
             System.out.println("User Name must be atleast 4 characters long");
@@ -117,7 +123,7 @@ public class LoginController {
                 // System.out.println("Hashed Password: "+Arrays.toString(hashedPassword));
 
                 System.out.println("New user created..");
-                User u = new User(userId, userName, password);
+                User u = new User(null, name, email, userName, password, userType);
                 ur.saveUser(u);
             } else {
                 System.out.println("Password do not match");

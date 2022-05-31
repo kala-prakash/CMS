@@ -13,15 +13,18 @@ public class Semester {
 
     private Long id;
     private String name;
-    private Long subId;
+    private Long facultyId;
 
     public Semester() {
     }
 
-    public Semester(Long id, String name) {
+    public Semester(Long id, String name, Long facultyId) {
         this.id = id;
         this.name = name;
+        this.facultyId = facultyId;
     }
+
+    
 
     public Long getId() {
         return id;
@@ -39,12 +42,12 @@ public class Semester {
         this.name = name;
     }
 
-    public Long getSubId() {
-        return subId;
+    public Long getFacultyId() {
+        return facultyId;
     }
 
-    public void setSubId(Long subId) {
-        this.subId = subId;
+    public void setFacultyId(Long facultyId) {
+        this.facultyId = facultyId;
     }
 
 }

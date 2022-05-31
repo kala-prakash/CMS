@@ -14,6 +14,7 @@ public class ContentType {
     private Long id;
     private String name;
     private String extension;
+    private Long contentId;
 
     public ContentType() {
     }
@@ -47,4 +48,13 @@ public class ContentType {
     public void setExtension(String extension) {
         this.extension = extension;
     }
+
+    public Long getContentId() {
+        return contentId;
+    }
+
+    public void setContentId(Long contentId) {
+        this.contentId = contentId;
+    }
+
 }

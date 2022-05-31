@@ -10,11 +10,11 @@ package com.syntech.model;
  * @author kala
  */
 public class Content {
+
     private Long id;
     private String name;
     private String docPath;
-    
-    ContentType contType = new ContentType();
+    private Long subId;
 
     public Content() {
     }
@@ -25,7 +25,7 @@ public class Content {
         this.docPath = docPath;
     }
 
-       public Long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -48,6 +48,13 @@ public class Content {
     public void setDocPath(String docPath) {
         this.docPath = docPath;
     }
-    
-    
+
+    public Long getSubId() {
+        return subId;
+    }
+
+    public void setSubId(Long subId) {
+        this.subId = subId;
+    }
+
 }

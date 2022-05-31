@@ -16,8 +16,8 @@ public class Student {
 
     private Long id;
     private String studentName;
-    private String facultyName;
-    private String semesterName;
+    private Long facultyId;
+    private Long semesterId;
     private String email;
     private String phone;
     private String address;
@@ -25,20 +25,21 @@ public class Student {
     private String endDate;
 
     public Student() {
-        
+
     }
-   
-    public Student(Long id, String studentName, String facultyName, String semesterName, String email, String phone, String address, String startDate, String endDate) {
+
+    public Student(Long id, String studentName, Long facultyId, Long semesterId,String email, String phone, String address, String startDate, String endDate) {
         this.id = id;
         this.studentName = studentName;
-        this.facultyName = facultyName;
-        this.semesterName = semesterName;
+        this.facultyId = facultyId;
+        this.semesterId = semesterId;
         this.email = email;
         this.phone = phone;
         this.address = address;
         this.startDate = startDate;
         this.endDate = endDate;
     }
+
 
     public Long getId() {
         return id;
@@ -56,20 +57,20 @@ public class Student {
         this.studentName = studentName;
     }
 
-    public String getFacultyName() {
-        return facultyName;
+    public Long getFacultyId() {
+        return facultyId;
     }
 
-    public void setFacultyName(String facultyName) {
-        this.facultyName = facultyName;
+    public void setFacultyId(Long facultyId) {
+        this.facultyId = facultyId;
     }
 
-    public String getSemesterName() {
-        return semesterName;
+    public Long getSemesterId() {
+        return semesterId;
     }
 
-    public void setSemesterName(String semesterName) {
-        this.semesterName = semesterName;
+    public void setSemesterId(Long semesterId) {
+        this.semesterId = semesterId;
     }
 
     public String getEmail() {
@@ -114,13 +115,16 @@ public class Student {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 67 * hash + Objects.hashCode(this.id);
-        hash = 67 * hash + Objects.hashCode(this.studentName);
-        hash = 67 * hash + Objects.hashCode(this.facultyName);
-        hash = 67 * hash + Objects.hashCode(this.semesterName);
-        hash = 67 * hash + Objects.hashCode(this.email);
-        hash = 67 * hash + Objects.hashCode(this.phone);
+        int hash = 3;
+        hash = 83 * hash + Objects.hashCode(this.id);
+        hash = 83 * hash + Objects.hashCode(this.studentName);
+        hash = 83 * hash + Objects.hashCode(this.facultyId);
+        hash = 83 * hash + Objects.hashCode(this.semesterId);
+        hash = 83 * hash + Objects.hashCode(this.email);
+        hash = 83 * hash + Objects.hashCode(this.phone);
+        hash = 83 * hash + Objects.hashCode(this.address);
+        hash = 83 * hash + Objects.hashCode(this.startDate);
+        hash = 83 * hash + Objects.hashCode(this.endDate);
         return hash;
     }
 
@@ -139,19 +143,28 @@ public class Student {
         if (!Objects.equals(this.studentName, other.studentName)) {
             return false;
         }
-        if (!Objects.equals(this.facultyName, other.facultyName)) {
-            return false;
-        }
-        if (!Objects.equals(this.semesterName, other.semesterName)) {
-            return false;
-        }
         if (!Objects.equals(this.email, other.email)) {
             return false;
         }
         if (!Objects.equals(this.phone, other.phone)) {
             return false;
         }
+        if (!Objects.equals(this.address, other.address)) {
+            return false;
+        }
+        if (!Objects.equals(this.startDate, other.startDate)) {
+            return false;
+        }
+        if (!Objects.equals(this.endDate, other.endDate)) {
+            return false;
+        }
         if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        if (!Objects.equals(this.facultyId, other.facultyId)) {
+            return false;
+        }
+        if (!Objects.equals(this.semesterId, other.semesterId)) {
             return false;
         }
         return true;
@@ -159,7 +172,8 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Student{" + "id=" + id + ", studentName=" + studentName + ", facultyName=" + facultyName + ", semesterName=" + semesterName + ", email=" + email + ", phone=" + phone + ", address=" + address + '}';
+        return "Student{" + "id=" + id + ", studentName=" + studentName + ", facultyId=" + facultyId + ", semesterId=" + semesterId + ", email=" + email + ", phone=" + phone + ", address=" + address + ", startDate=" + startDate + ", endDate=" + endDate + '}';
     }
+    
 
 }

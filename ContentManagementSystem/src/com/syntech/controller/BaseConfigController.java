@@ -47,7 +47,7 @@ public class BaseConfigController {
         contentName = fac.addFaculty("Content", destPath);
         System.out.println("---------------------");
         destPath = destPath + "/" + contentName;
-        contentType = fac.addFaculty("Document", destPath);
+        contentType = fac.addFaculty("DocumentType", destPath);
         System.out.println("---------------------");
         destPath = destPath + "/" + contentType + "/";
         fp.toUpload("srcPath", "fileName", destPath);
