@@ -5,12 +5,18 @@
  */
 package com.syntech.repository;
 
+import static com.syntech.controller.MenuController.mc;
 import static com.syntech.db.Mysqlcon.doConnection;
 import com.syntech.model.Student;
+import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  *
@@ -47,6 +53,71 @@ public class StudentRepository {
             pstmt.setString(8, stud.getEndDate());
             pstmt.executeUpdate();
             System.out.println("Student added successfully");
+        } catch (SQLException e) {
+            System.out.println(e);
+        } finally {
+            doConnection().close();
+        }
+    }
+
+    public void viewStudentDetails() throws SQLException, IOException, NoSuchAlgorithmException {
+        try {
+            String viewQuery = "SELECT * from student";
+            Statement stmt = doConnection().createStatement();
+            ResultSet rs = stmt.executeQuery(viewQuery);
+            while (rs.next()) {
+                Long studentID = rs.getLong("id");
+                String Name = rs.getString("Name");
+                Long facultyId = rs.getLong("fac_id");
+                Long semesterId = rs.getLong("sem_id");
+                String email = rs.getString("email");
+                String phone = rs.getString("phone");
+                String address = rs.getString("address");
+                String startDate = rs.getString("start_date");
+                String endDate = rs.getString("end_date");
+
+                System.out.println("id " + studentID + "++" + "Name " + Name + "++" + "faculty_id " + facultyId + "++" + "semester_id " + semesterId + "++" + "email " + email + "++" + "phone " + phone + "++" + "address " + address + "++" + "star_date " + startDate + "++" + "end_date " + endDate);
+                mc.registerMenu();
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        } finally {
+            doConnection().close();
+        }
+    }
+
+    public void updateStudentDetails() throws SQLException, IOException, NoSuchAlgorithmException {
+        String updateQuery = "UPDATE student set name=? where id=?";
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Enter the name to be changed:");
+        String name = scan.nextLine();
+        System.out.println("Enter the student_Id :");
+        Long studentId = scan.nextLong();
+        try {
+            PreparedStatement stmt = doConnection().prepareStatement(updateQuery);
+            stmt.setString(1, name);
+            stmt.setLong(2, studentId);
+            stmt.executeUpdate();
+            System.out.println("Database updated successfully ");
+            mc.registerMenu();
+        } catch (SQLException e) {
+            System.out.println(e);
+        } finally {
+            doConnection().close();
+        }
+    }
+
+    public void deleteStudentDetails() throws SQLException, IOException, NoSuchAlgorithmException {
+        try {
+            String delete_query = "DELETE FROM student WHERE id = ?";
+            Scanner scan = new Scanner(System.in);
+            System.out.println("Enter the Student_Id to delete:");
+            Long studentID = scan.nextLong();
+            PreparedStatement pstmt = doConnection().prepareStatement(delete_query);
+            pstmt.setLong(1, studentID);
+            pstmt.executeUpdate();
+            System.out.println("Deleted student details with id: " + studentID + " succesfully");
+            mc.registerMenu();
         } catch (SQLException e) {
             System.out.println(e);
         } finally {
