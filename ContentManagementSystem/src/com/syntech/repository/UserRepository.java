@@ -100,7 +100,7 @@ public class UserRepository {
             doConnection().close();
         }
     }
-    
+
     public void updateUserDetails() throws SQLException, IOException, NoSuchAlgorithmException {
         String updateQuery = "UPDATE user set password=? where id=?";
         Scanner scan = new Scanner(System.in);
@@ -120,5 +120,48 @@ public class UserRepository {
         } finally {
             doConnection().close();
         }
-    }      
+    }
+
+    public boolean isAdmin(String userName,String password) throws SQLException {
+        String sql = "SELECT * FROM user WHERE user_name=? and password =? and user_type='Admin'";
+        try {
+            PreparedStatement stmt = doConnection().prepareStatement(sql);
+            stmt.setString(1,userName);
+            stmt.setString(2,password);
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()){
+               return true;
+            }
+            System.out.println("Invalid username or password");
+        } catch (SQLException e) {
+            
+            System.out.println(e);
+        } finally {
+            doConnection().close();
+        }
+        return false;
+        
+        
+    }
+     public boolean isUser(String userName,String password) throws SQLException {
+        String sql = "SELECT * FROM user WHERE user_name=? and password =? and user_type='General'";
+        try {
+            PreparedStatement stmt = doConnection().prepareStatement(sql);
+            stmt.setString(1,userName);
+            stmt.setString(2,password);
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()){
+               return true;
+            }
+            System.out.println("Invalid username or password");
+        } catch (SQLException e) {
+            
+            System.out.println(e);
+        } finally {
+            doConnection().close();
+        }
+        return false;
+        
+        
+    }
 }

@@ -26,12 +26,13 @@ public class LoginController {
     public static RegistrationController rc = new RegistrationController();
 
     public void loginAdmin() throws SQLException, NoSuchAlgorithmException, IOException {
+
         Scanner keyboard = new Scanner(System.in);
         System.out.println("Enter username: ");
         String inpUser = keyboard.nextLine();
         System.out.println("Enter password: ");
         String inpPass = keyboard.nextLine();
-        if ((inpUser).equals("admin") && (inpPass).equals("admin")) {
+        if (ur.isAdmin(inpUser, inpPass)) {
             System.out.println("You are logged in as admin....");
         } else {
             System.out.println("userName or password did not match.!!");
@@ -48,20 +49,11 @@ public class LoginController {
         String inpUser = keyboard.nextLine();
         System.out.println("Enter password: ");
         String inpPass = keyboard.nextLine();
-        if (validataionUser(inpUser, inpPass)) {
-            System.out.println("login sucess  !!!!");
-            System.out.println("------------------");
-
-        } else {
-            System.out.println("UserName or Password did not match!!");
-            mc.mainMenu();
+        if (ur.isUser(inpUser, inpPass)) {
+            System.out.println("Your are Logged in as user");
         }
-
-    }
-
-    public boolean validataionUser(String userName, String password) {
-        return ur.getUserMap() != null && ur.getUserMap().containsKey(userName) && ur.getUserMap().get(userName).getPassword().equals(password);
-
+        else System.out.println("userName or password did not match..!!");
+        mc.mainMenu();
     }
 
     public void signUp() throws NoSuchAlgorithmException, SQLException, IOException {
