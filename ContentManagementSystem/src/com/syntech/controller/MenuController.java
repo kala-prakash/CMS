@@ -93,7 +93,7 @@ public class MenuController {
                 this.registerMenu();
                 break;
             case "4":
-                lc.signUp();
+                this.userManagementMenu();
                 break;
             case "5":
                 this.cirriculamManagementMenu();
@@ -310,9 +310,7 @@ public class MenuController {
                 this.semesterMenu();
                 break;
             case 3:
-                for (int i = 0; i <= 5; i++) {
-                    this.subjectMenu();
-                }
+                this.subjectMenu();
                 break;
             case 4:
                 this.contentMenu();
@@ -329,4 +327,32 @@ public class MenuController {
         }
     }
 
+    public void userManagementMenu() throws SQLException, NoSuchAlgorithmException, IOException {
+        Scanner input = new Scanner(System.in);
+        int inp;
+        System.out.println("1) Add user..");
+        System.out.println("2) Update user details..");
+        System.out.println("3) view user details..");
+        System.out.println("4) Delete user..");
+        System.out.println("5) Return....");
+        inp = input.nextInt();
+        switch (inp) {
+            case 1:
+                lc.signUp();
+                break;
+            case 2:
+               ur.updateUserDetails();
+                break;
+            case 3:
+                ur.viewUserDetails();
+                break;
+            case 4:
+               ur.deleteUserDetails();
+                break;
+            default:
+                this.adminMenu();
+                break;
+        }
+
+    }
 }
