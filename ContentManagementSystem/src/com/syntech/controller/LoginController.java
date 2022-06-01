@@ -8,6 +8,7 @@ package com.syntech.controller;
 import static com.syntech.controller.MenuController.mc;
 import com.syntech.model.User;
 import com.syntech.repository.UserRepository;
+import static com.syntech.utilities.HashedPassword.hashString;
 import static com.syntech.utilities.Validation.verifyPassword;
 import static com.syntech.utilities.Validation.verifyUserName;
 import java.io.IOException;
@@ -51,6 +52,7 @@ public class LoginController {
         String inpPass = keyboard.nextLine();
         if (ur.isUser(inpUser, inpPass)) {
             System.out.println("Your are Logged in as user");
+            mc.adminMenu();
         }
         else System.out.println("userName or password did not match..!!");
         mc.mainMenu();
@@ -91,7 +93,8 @@ public class LoginController {
         String cpassword = keyboard.next();
         if (password.equals(cpassword)) {
             System.out.println("Password matches!!");
-            User u = new User(null, name, email, userName, password, userType);
+            String encryptPassword = hashString(password);
+            User u = new User(null, name, email, userName, encryptPassword, userType);
             ur.saveUser(u);
             ur.userQuery(u);
             mc.adminMenu();

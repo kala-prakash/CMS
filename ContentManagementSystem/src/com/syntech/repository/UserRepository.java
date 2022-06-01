@@ -8,6 +8,8 @@ package com.syntech.repository;
 import static com.syntech.controller.MenuController.mc;
 import static com.syntech.db.Mysqlcon.doConnection;
 import com.syntech.model.User;
+import com.syntech.utilities.HashedPassword;
+import static com.syntech.utilities.HashedPassword.isHashingMatched;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.PreparedStatement;
@@ -23,6 +25,8 @@ import java.util.*;
  */
 //yesma abstraction use garne
 public class UserRepository {
+
+    HashedPassword hs = new HashedPassword();
 
     private Map<String, User> userMap = new HashMap<>();
 
@@ -45,6 +49,7 @@ public class UserRepository {
 
     public void userQuery(User usr) throws SQLException {
         try {
+   
             String sql = "INSERT INTO user(name,email,user_name,password,user_type) VALUES (?,?,?,?,?)";
             PreparedStatement pstmt = doConnection().prepareStatement(sql);
             pstmt.setString(1, usr.getName());
@@ -122,46 +127,51 @@ public class UserRepository {
         }
     }
 
-    public boolean isAdmin(String userName,String password) throws SQLException {
-        String sql = "SELECT * FROM user WHERE user_name=? and password =? and user_type='Admin'";
+    public boolean isAdmin(String userName, String password) throws SQLException {
+        String sql = "SELECT * FROM user WHERE user_name=? and user_type='Admin'";
         try {
             PreparedStatement stmt = doConnection().prepareStatement(sql);
-            stmt.setString(1,userName);
-            stmt.setString(2,password);
+            stmt.setString(1, userName);
             ResultSet rs = stmt.executeQuery();
-            while(rs.next()){
-               return true;
+            while (rs.next()) {
+                String hashedPassword = rs.getString(4);
+                boolean isPassMatched = isHashingMatched(password, hashedPassword);
+                if (isPassMatched) {
+                    return true;
+                }
             }
             System.out.println("Invalid username or password");
         } catch (SQLException e) {
-            
+
             System.out.println(e);
         } finally {
             doConnection().close();
         }
         return false;
-        
-        
+
     }
-     public boolean isUser(String userName,String password) throws SQLException {
-        String sql = "SELECT * FROM user WHERE user_name=? and password =? and user_type='General'";
+
+    public boolean isUser(String userName, String password) throws SQLException {
+        String sql = "SELECT * FROM user WHERE user_name=? and user_type='General'";
         try {
             PreparedStatement stmt = doConnection().prepareStatement(sql);
-            stmt.setString(1,userName);
-            stmt.setString(2,password);
+            stmt.setString(1, userName);
             ResultSet rs = stmt.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
+                String hashedPassword = rs.getString(4);
+                boolean isPassMatched = isHashingMatched(password, hashedPassword);
+                if (isPassMatched) {
                return true;
+            }
             }
             System.out.println("Invalid username or password");
         } catch (SQLException e) {
-            
+
             System.out.println(e);
         } finally {
             doConnection().close();
         }
         return false;
-        
-        
+
     }
 }
